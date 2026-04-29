@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
-import Logo from './Logo';
-import ThemeToggle from '../../../src/lib/components/ThemeToggle';
-import { PORTFOLIO_DATA } from '../../../src/lib/data';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import ThemeToggle from "../../../src/components/ThemeToggle";
+import { PORTFOLIO_DATA } from "../../../src/lib/data";
+import Logo from "./Logo";
 
 export default function Nav() {
   const pathname = usePathname();
-  const isHome = pathname === '/';
-  const isExperiences = pathname.startsWith('/experiences');
-  const isBlog = pathname.startsWith('/blog');
+  const isHome = pathname === "/";
+  const isExperiences = pathname.startsWith("/experiences");
+  const isBlog = pathname.startsWith("/blog");
 
-  const [activeSection, setActiveSection] = useState('top');
+  const [activeSection, setActiveSection] = useState("top");
 
   useEffect(() => {
     if (!isHome) return;
-    const ids = ['top', 'domains', 'work', 'about', 'contact'];
+    const ids = ["top", "domains", "work", "about", "contact"];
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) setActiveSection(e.target.id);
         });
       },
-      { rootMargin: '-40% 0px -50% 0px' },
+      { rootMargin: "-40% 0px -50% 0px" },
     );
     ids.forEach((id) => {
       const el = document.getElementById(id);
@@ -33,17 +33,20 @@ export default function Nav() {
     return () => obs.disconnect();
   }, [isHome]);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    if (id === 'contact' && isHome) {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    id: string,
+  ) => {
+    if (id === "contact" && isHome) {
       e.preventDefault();
-      const el = document.getElementById('contact');
+      const el = document.getElementById("contact");
       if (el) {
         const top = el.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top, behavior: 'smooth' });
+        window.scrollTo({ top, behavior: "smooth" });
       }
-    } else if (id === 'home' && isHome) {
+    } else if (id === "home" && isHome) {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -51,41 +54,41 @@ export default function Nav() {
     <nav
       className="shell"
       style={{
-        position: 'fixed',
+        position: "fixed",
         top: 0,
         left: 0,
         right: 0,
         zIndex: 50,
         paddingTop: 28,
         paddingBottom: 28,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        background: 'var(--nav-bg)',
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        background: "var(--nav-bg)",
       }}
     >
       <Logo />
 
-      <div style={{ display: 'flex', gap: 36, alignItems: 'center' }}>
+      <div style={{ display: "flex", gap: 36, alignItems: "center" }}>
         {PORTFOLIO_DATA.nav.map((n) => {
           const isActive =
-            (n.id === 'home' && isHome && activeSection !== 'contact') ||
-            (n.id === 'experiences' && isExperiences) ||
-            (n.id === 'blog' && isBlog) ||
-            (n.id === 'contact' && isHome && activeSection === 'contact');
+            (n.id === "home" && isHome && activeSection !== "contact") ||
+            (n.id === "experiences" && isExperiences) ||
+            (n.id === "blog" && isBlog) ||
+            (n.id === "contact" && isHome && activeSection === "contact");
 
           return (
             <Link
               key={n.id}
               href={n.href}
               onClick={(e) => handleNavClick(e, n.id)}
-              className={`nav-link ${isActive ? 'active' : ''}`}
+              className={`nav-link ${isActive ? "active" : ""}`}
               style={{
                 fontSize: 14,
                 fontWeight: 500,
-                color: isActive ? 'var(--fg)' : 'var(--fg-muted)',
+                color: isActive ? "var(--fg)" : "var(--fg-muted)",
               }}
             >
               {n.label}
@@ -94,8 +97,8 @@ export default function Nav() {
         })}
       </div>
 
-      <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
-        <span className="mono" style={{ color: 'var(--fg-dim)', fontSize: 11 }}>
+      <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+        <span className="mono" style={{ color: "var(--fg-dim)", fontSize: 11 }}>
           {PORTFOLIO_DATA.identity.location}
         </span>
         <ThemeToggle />

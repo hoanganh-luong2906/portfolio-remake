@@ -1,4 +1,15 @@
-import { About, Contact, Domains, FAQ, Hero, HomeClient, Marquee, Nav, Projects, Testimonials } from './components';
+import {
+  About,
+  Contact,
+  Domains,
+  FAQ,
+  Hero,
+  HomeClient,
+  Marquee,
+  Nav,
+  Projects,
+  Testimonials,
+} from "./components";
 
 export default function Home() {
   return (

@@ -1,4 +1,4 @@
-import { PORTFOLIO_DATA } from '../../../src/lib/data';
+import { PORTFOLIO_DATA } from "../../../src/lib/data";
 
 export default function BlogHero() {
   const D = PORTFOLIO_DATA;
@@ -8,18 +8,18 @@ export default function BlogHero() {
       <div
         className="reveal"
         style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
           paddingBottom: 60,
-          borderBottom: '1px solid var(--line)',
+          borderBottom: "1px solid var(--line)",
           marginBottom: 80,
         }}
       >
-        <div className="mono" style={{ color: 'var(--fg-muted)' }}>
+        <div className="mono" style={{ color: "var(--fg-muted)" }}>
           ◍ WRITING · {D.blog.length} POSTS
         </div>
-        <div className="mono" style={{ color: 'var(--fg-muted)' }}>
+        <div className="mono" style={{ color: "var(--fg-muted)" }}>
           UPDATED — APR 2026
         </div>
       </div>
@@ -28,14 +28,17 @@ export default function BlogHero() {
         <div className="eyebrow" style={{ marginBottom: 28 }}>
           ◍ BLOG — NOTES & ESSAYS
         </div>
-        <h1 className="h-display" style={{ margin: 0, fontWeight: 500, maxWidth: 1100 }}>
+        <h1
+          className="h-display"
+          style={{ margin: 0, fontWeight: 500, maxWidth: 1100 }}
+        >
           Notes from
           <br />
-          <span style={{ color: 'var(--fg-muted)' }}>the workshop.</span>
+          <span style={{ color: "var(--fg-muted)" }}>the workshop.</span>
         </h1>
         <p className="body" style={{ marginTop: 32, maxWidth: 640 }}>
-          Short writing on engineering, design systems, and the trade-offs that don&rsquo;t fit in a tweet. Roughly one
-          post a month, sometimes two.
+          Short writing on engineering, design systems, and the trade-offs that
+          don&rsquo;t fit in a tweet. Roughly one post a month, sometimes two.
         </p>
       </div>
     </section>

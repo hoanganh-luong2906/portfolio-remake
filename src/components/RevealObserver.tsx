@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 export default function RevealObserver() {
   const pathname = usePathname();
@@ -19,7 +19,7 @@ export default function RevealObserver() {
             }
           });
         },
-        { threshold: 0.05, rootMargin: "0px 0px -10% 0px" }
+        { threshold: 0.05, rootMargin: "0px 0px -10% 0px" },
       );
 
       document.querySelectorAll(".reveal").forEach((el) => {
@@ -34,7 +34,9 @@ export default function RevealObserver() {
 
     const id = requestAnimationFrame(() => requestAnimationFrame(setup));
     const fallback = setTimeout(() => {
-      document.querySelectorAll(".reveal:not(.in)").forEach((el) => el.classList.add("in"));
+      document
+        .querySelectorAll(".reveal:not(.in)")
+        .forEach((el) => el.classList.add("in"));
     }, 1200);
 
     return () => {

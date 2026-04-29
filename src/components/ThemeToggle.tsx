@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function getInitialTheme(): "dark" | "light" {
   if (typeof document === "undefined") return "dark";
-  return (document.documentElement.getAttribute("data-theme") as "dark" | "light") || "dark";
+  return (
+    (document.documentElement.getAttribute("data-theme") as "dark" | "light") ||
+    "dark"
+  );
 }
 
 export default function ThemeToggle() {
@@ -13,12 +16,17 @@ export default function ThemeToggle() {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     document.body.setAttribute("data-theme", theme);
-    try { localStorage.setItem("hal-theme", theme); } catch {}
+    try {
+      localStorage.setItem("hal-theme", theme);
+    } catch {}
   }, [theme]);
 
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {
-      if (e.key === "hal-theme" && (e.newValue === "dark" || e.newValue === "light")) {
+      if (
+        e.key === "hal-theme" &&
+        (e.newValue === "dark" || e.newValue === "light")
+      ) {
         setTheme(e.newValue);
       }
     };
@@ -66,17 +74,34 @@ export default function ThemeToggle() {
       >
         {isDark ? (
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" fill="currentColor" />
+            <path
+              d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"
+              fill="currentColor"
+            />
           </svg>
         ) : (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          >
             <circle cx="12" cy="12" r="4" fill="currentColor" />
             <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
           </svg>
         )}
       </span>
-      <span aria-hidden="true" style={{ width: 32, height: 32, display: "inline-block" }} />
-      <span aria-hidden="true" style={{ width: 32, height: 32, display: "inline-block" }} />
+      <span
+        aria-hidden="true"
+        style={{ width: 32, height: 32, display: "inline-block" }}
+      />
+      <span
+        aria-hidden="true"
+        style={{ width: 32, height: 32, display: "inline-block" }}
+      />
     </button>
   );
 }

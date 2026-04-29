@@ -22,7 +22,7 @@ export default function HomeClient() {
           if (e.isIntersecting) setActive(e.target.id);
         });
       },
-      { rootMargin: "-40% 0px -50% 0px" }
+      { rootMargin: "-40% 0px -50% 0px" },
     );
     SECTIONS.forEach(({ id }) => {
       const el = document.getElementById(id);
@@ -36,7 +36,10 @@ export default function HomeClient() {
     const spot = spotRef.current;
     if (!spot) return;
     let raf: number | null = null;
-    let tx = 0, ty = 0, cx = 0, cy = 0;
+    let tx = 0;
+    let ty = 0;
+    let cx = 0;
+    let cy = 0;
 
     const onMove = (e: MouseEvent) => {
       tx = e.clientX;

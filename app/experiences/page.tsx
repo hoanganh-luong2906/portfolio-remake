@@ -1,7 +1,7 @@
-import Nav from '../(landing)/components/Nav';
-import ExperienceHero from './components/ExperienceHero';
-import ExperiencesList from './components/ExperiencesList';
-import ExperienceFooter from './components/ExperienceFooter';
+import Nav from "../(landing)/components/Nav";
+import ExperienceFooter from "./components/ExperienceFooter";
+import ExperienceHero from "./components/ExperienceHero";
+import ExperiencesList from "./components/ExperiencesList";
 
 export default function ExperiencesPage() {
   return (

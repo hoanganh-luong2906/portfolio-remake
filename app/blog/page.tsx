@@ -1,7 +1,7 @@
-import Nav from '../(landing)/components/Nav';
-import BlogHero from './components/BlogHero';
-import BlogList from './components/BlogList';
-import BlogFooter from './components/BlogFooter';
+import Nav from "../(landing)/components/Nav";
+import BlogFooter from "./components/BlogFooter";
+import BlogHero from "./components/BlogHero";
+import BlogList from "./components/BlogList";
 
 export default function BlogPage() {
   return (

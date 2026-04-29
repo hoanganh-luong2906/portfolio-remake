@@ -1,6 +1,10 @@
 "use client";
 
+import { useState } from "react";
+
 export default function BlogFooter() {
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
   return (
     <section className="shell" style={{ paddingBottom: 120 }}>
       <div
@@ -18,15 +22,30 @@ export default function BlogFooter() {
         }}
       >
         <div>
-          <h3 style={{ margin: 0, fontSize: "clamp(28px, 3vw, 44px)", fontWeight: 500, letterSpacing: "-0.015em", lineHeight: 1.1 }}>
+          <h3
+            style={{
+              margin: 0,
+              fontSize: "clamp(28px, 3vw, 44px)",
+              fontWeight: 500,
+              letterSpacing: "-0.015em",
+              lineHeight: 1.1,
+            }}
+          >
             Get new posts in your inbox.
           </h3>
-          <p className="body" style={{ marginTop: 12, marginBottom: 0, maxWidth: 520 }}>
-            One email when something new goes up. No tracking, no other lists, easy unsubscribe.
+          <p
+            className="body"
+            style={{ marginTop: 12, marginBottom: 0, maxWidth: 520 }}
+          >
+            One email when something new goes up. No tracking, no other lists,
+            easy unsubscribe.
           </p>
         </div>
         <form
-          onSubmit={(e) => { e.preventDefault(); alert("Subscribed (placeholder)"); }}
+          onSubmit={(e) => {
+            e.preventDefault();
+            setIsSubscribed(true);
+          }}
           style={{ display: "flex", gap: 8 }}
         >
           <input
@@ -45,13 +64,28 @@ export default function BlogFooter() {
               outline: "none",
             }}
           />
-          <button type="submit" className="btn btn-primary" style={{ height: 56, padding: "0 28px", fontSize: 15 }}>
-            Subscribe
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{ height: 56, padding: "0 28px", fontSize: 15 }}
+          >
+            {isSubscribed ? "Subscribed" : "Subscribe"}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-              <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
         </form>
+        {isSubscribed && (
+          <p className="body" style={{ margin: "8px 0 0", width: "100%" }}>
+            You are subscribed. This is currently a local placeholder flow.
+          </p>
+        )}
       </div>
     </section>
   );

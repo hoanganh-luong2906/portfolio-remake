@@ -180,10 +180,30 @@ export const PORTFOLIO_DATA = {
     },
   ],
   experiences: [
-    { year: "2024 — Now", role: "Lead Front-end Engineer", company: "Loom", note: "Editor & rendering" },
-    { year: "2023 — 2024", role: "Design Engineer", company: "Helix", note: "Design system" },
-    { year: "2022 — 2023", role: "Founding Engineer", company: "Atlas (acq.)", note: "IDE & infra" },
-    { year: "2021 — 2022", role: "Freelance", company: "Self", note: "Studios & startups" },
+    {
+      year: "2024 — Now",
+      role: "Lead Front-end Engineer",
+      company: "Loom",
+      note: "Editor & rendering",
+    },
+    {
+      year: "2023 — 2024",
+      role: "Design Engineer",
+      company: "Helix",
+      note: "Design system",
+    },
+    {
+      year: "2022 — 2023",
+      role: "Founding Engineer",
+      company: "Atlas (acq.)",
+      note: "IDE & infra",
+    },
+    {
+      year: "2021 — 2022",
+      role: "Freelance",
+      company: "Self",
+      note: "Studios & startups",
+    },
   ],
   faqs: [
     {
@@ -250,7 +270,8 @@ export const PORTFOLIO_DATA = {
     },
     {
       slug: "maps-are-the-most-interesting-design-problem",
-      title: "Why maps are the most interesting design problem of the next decade",
+      title:
+        "Why maps are the most interesting design problem of the next decade",
       excerpt:
         "A reading list, a thesis, and a slow argument that map UX has been frozen for 15 years and is overdue for a redesign.",
       date: "Jan 22, 2026",

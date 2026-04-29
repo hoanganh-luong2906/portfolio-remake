@@ -2,7 +2,10 @@ import Link from "next/link";
 
 export default function Logo() {
   return (
-    <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: 12 }}>
+    <Link
+      href="/"
+      style={{ display: "inline-flex", alignItems: "center", gap: 12 }}
+    >
       <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
         <circle cx="19" cy="19" r="18.5" stroke="var(--line-2)" />
         <path
@@ -12,7 +15,9 @@ export default function Logo() {
           strokeLinecap="round"
         />
       </svg>
-      <span style={{ fontWeight: 700, fontSize: 18, letterSpacing: "0.02em" }}>HAL</span>
+      <span style={{ fontWeight: 700, fontSize: 18, letterSpacing: "0.02em" }}>
+        HAL
+      </span>
     </Link>
   );
 }
