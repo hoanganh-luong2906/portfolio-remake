@@ -1,5 +1,4 @@
-import Nav from "../../(landing)/components/Nav";
-import { PORTFOLIO_DATA } from "../../../src/lib/data";
+import { PORTFOLIO_DATA } from "@/src/lib/data";
 import BlogPostDetail from "../components/BlogPostDetail";
 
 export function generateStaticParams() {
@@ -9,11 +8,8 @@ export function generateStaticParams() {
 export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
   const { slug } = await props.params;
   return (
-    <>
-      <Nav />
-      <main>
-        <BlogPostDetail slug={slug} />
-      </main>
-    </>
+    <main>
+      <BlogPostDetail slug={slug} />
+    </main>
   );
 }

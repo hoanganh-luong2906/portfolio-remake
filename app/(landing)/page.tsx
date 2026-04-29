@@ -6,7 +6,6 @@ import {
   Hero,
   HomeClient,
   Marquee,
-  Nav,
   Projects,
   Testimonials,
 } from "./components";
@@ -14,7 +13,6 @@ import {
 export default function Home() {
   return (
     <>
-      <Nav />
       <HomeClient />
       <main>
         <Hero />

@@ -1,17 +1,13 @@
-import Nav from "../(landing)/components/Nav";
 import BlogFooter from "./components/BlogFooter";
 import BlogHero from "./components/BlogHero";
 import BlogList from "./components/BlogList";
 
 export default function BlogPage() {
   return (
-    <>
-      <Nav />
-      <main>
-        <BlogHero />
-        <BlogList />
-        <BlogFooter />
-      </main>
-    </>
+    <main>
+      <BlogHero />
+      <BlogList />
+      <BlogFooter />
+    </main>
   );
 }

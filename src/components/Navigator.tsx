@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import ThemeToggle from "../../../src/components/ThemeToggle";
-import { PORTFOLIO_DATA } from "../../../src/lib/data";
-import Logo from "./Logo";
+import Logo from "../../app/(landing)/components/Logo";
+import { PORTFOLIO_DATA } from "../lib/data";
+import ThemeToggle from "./ThemeToggle";
 
-export default function Nav() {
+export default function Navigator() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const isExperiences = pathname.startsWith("/experiences");

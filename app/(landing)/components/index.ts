@@ -6,6 +6,5 @@ export { default as Hero } from "./Hero";
 export { default as HomeClient } from "./HomeClient";
 export { default as Logo } from "./Logo";
 export { default as Marquee } from "./Marquee";
-export { default as Nav } from "./Nav";
 export { default as Projects } from "./Projects";
 export { default as Testimonials } from "./Testimonials";

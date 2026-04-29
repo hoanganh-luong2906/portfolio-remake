@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import Navigator from "@/src/components/Navigator";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -38,7 +39,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <Navigator />
+        {children}
+      </body>
     </html>
   );
 }
