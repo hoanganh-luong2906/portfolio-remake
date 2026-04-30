@@ -1,4 +1,4 @@
-import { PORTFOLIO_DATA } from "../data";
+import { PORTFOLIO_DATA } from "@/src/lib/data";
 
 export default function Testimonials() {
   const D = PORTFOLIO_DATA;
