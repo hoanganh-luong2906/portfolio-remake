@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
-import Navigator from "@/src/components/Navigator";
+import Navbar from "@/src/components/Navbar";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -40,7 +40,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Navigator />
+        <Navbar />
         {children}
       </body>
     </html>

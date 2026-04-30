@@ -1,4 +1,6 @@
 /* Personal Portfolio — HAL */
+@import 'tailwindcss';
+
 :root,
 body {
   /* DARK (default) */

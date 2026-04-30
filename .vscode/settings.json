@@ -5,7 +5,7 @@
   "editor.formatOnType": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "never"
+    "source.organizeImports": "always"
   },
   "files.eol": "\n",
   "files.associations": {

@@ -3,9 +3,9 @@ export const PORTFOLIO_DATA = {
     initials: "HAL",
     name: "Hoang Anh Luong",
     role: "Front-end Developer",
-    location: "Brooklyn, NY",
-    email: "hello@hal.studio",
-    yearsExp: "+2 YoE",
+    location: "Ho Chi Minh City, Vietnam",
+    email: "hoanganh.luong2906@gmail.com",
+    yearsExp: "+3 YoE",
     available: true,
     tagline:
       "I build Next.js apps that move with intent — fast, accessible, and full of considered detail. App Router, Server Components, and the rest of the modern React stack are my default base.",

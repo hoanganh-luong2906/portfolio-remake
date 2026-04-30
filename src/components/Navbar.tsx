@@ -7,7 +7,7 @@ import Logo from "../../app/(landing)/components/Logo";
 import { PORTFOLIO_DATA } from "../lib/data";
 import ThemeToggle from "./ThemeToggle";
 
-export default function Navigator() {
+export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const isExperiences = pathname.startsWith("/experiences");
