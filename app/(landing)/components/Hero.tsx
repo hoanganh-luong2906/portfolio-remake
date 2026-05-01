@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { PORTFOLIO_DATA } from "../../../src/lib/data";
 
@@ -75,53 +74,23 @@ export default function Hero() {
 
       {/* Display name */}
       <div className="w-full flex justify-between">
-        <div>
+        <div className="w-fit flex flex-col justify-between">
           <div className="reveal">
             <div className="eyebrow" style={{ marginBottom: 28 }}>
               ◍ Front-end Developer · Design Engineer
             </div>
             <h1 className="h-display" style={{ margin: 0, fontWeight: 500 }}>
               <span style={{ display: "block" }}>Hoang Anh</span>
-              <span style={{ display: "block" }}>
-                Luong<span style={{ color: "var(--accent)" }}>.</span>
-              </span>
+              <span style={{ color: "var(--accent)" }}>Luong.</span>
             </h1>
           </div>
 
-          <div
-            className="reveal"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1.1fr 1fr 1fr",
-              gap: 40,
-              marginTop: 80,
-              alignItems: "end",
-            }}
-          >
-            <div>
-              <p className="body" style={{ maxWidth: 460, marginTop: 0 }}>
-                {D.identity.tagline} I work across the seam between design and
-                engineering — building tools, design systems, and the occasional
-                shader.
-              </p>
-              <div style={{ display: "flex", gap: 12, marginTop: 28 }}>
-                <Link href="#work" className="btn btn-primary">
-                  See selected work
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M12 5v14M6 13l6 6 6-6"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </Link>
-                <Link href="#contact" className="btn btn-ghost">
-                  Get in touch
-                </Link>
-              </div>
-            </div>
+          <div className="reveal flex flex-col gap-10 mt-20">
+            <p className="body" style={{ maxWidth: 460, marginTop: 0 }}>
+              {D.identity.tagline} I work across the seam between design and
+              engineering — building tools, design systems, and the occasional
+              shader.
+            </p>
 
             {/* Stats card */}
             <div className="glass" style={{ padding: 28 }}>
@@ -158,53 +127,35 @@ export default function Hero() {
           </div>
         </div>
 
-        <div>
-          <Image
-            src="/images/portrait-img.png"
-            alt="Hoang Anh Luong"
-            width={572}
-            height={600}
-          />
-
+        <div className="flex h-full justify-start w-fit items-end gap-2">
           {/* YoE */}
-          <div style={{ textAlign: "right" }}>
+          <div className="text-right translate-x-[40%] ">
             <div
+              className="text-[80px] font-extralight leading-none tracking-[-0.04em] text-[var(--fg)]"
               style={{
-                fontSize: 80,
-                fontWeight: 200,
-                lineHeight: 1,
                 fontFamily: "var(--font-plus-jakarta, 'Plus Jakarta Sans')",
-                color: "var(--fg)",
-                letterSpacing: "-0.04em",
               }}
             >
               +3
-              <span
-                style={{
-                  fontSize: 30,
-                  fontWeight: 300,
-                  color: "var(--accent)",
-                  marginLeft: 6,
-                }}
-              >
+              <span className="text-[30px] font-light text-[var(--accent)] ml-1.5">
                 YoE
               </span>
             </div>
-            <div
-              style={{
-                fontSize: 13,
-                color: "var(--fg-muted)",
-                marginTop: 8,
-                lineHeight: 1.7,
-                maxWidth: 240,
-                marginLeft: "auto",
-              }}
-            >
+            <div className=" text-[13px] text-[var(--fg-muted)] mt-2 leading-[1.7] ml-auto">
               Worked & collaborated with two-dozen
               <br />
               teams across four time zones.
             </div>
           </div>
+
+          <Image
+            src="/images/portrait-img.png"
+            alt="Hoang Anh Luong"
+            width={572}
+            height={300}
+            unoptimized
+            objectFit="contain"
+          />
         </div>
       </div>
 

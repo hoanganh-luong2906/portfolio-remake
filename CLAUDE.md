@@ -47,12 +47,12 @@ All portfolio content (nav, projects, blog posts, experiences, testimonials, FAQ
 
 ### Shared components: `src/lib/components/`
 
-| Component | Role |
-|---|---|
-| `PortfolioChrome` | Wraps every route — adds grain overlay, bg layer, and `RevealObserver` |
-| `RevealObserver` | Client component — wires IntersectionObserver to `.reveal` class → adds `.in` on scroll |
-| `ThemeToggle` | Client component — dark/light toggle, persists to `localStorage` key `hal-theme` |
-| `project-art/index.tsx` | SVG illustrations for each project, switched by `ArtKind` |
+| Component               | Role                                                                                    |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| `PortfolioChrome`       | Wraps every route — adds grain overlay, bg layer, and `RevealObserver`                  |
+| `RevealObserver`        | Client component — wires IntersectionObserver to `.reveal` class → adds `.in` on scroll |
+| `ThemeToggle`           | Client component — dark/light toggle, persists to `localStorage` key `hal-theme`        |
+| `project-art/index.tsx` | SVG illustrations for each project, switched by `ArtKind`                               |
 
 ### State colocation (Kent C. Dodds convention)
 
@@ -64,6 +64,7 @@ State lives as close to where it's used as possible. This is the guiding rule fo
 - **`HomeClient` and `Nav` each track active section independently** via their own `IntersectionObserver` — this is intentional, not a bug. Extracting shared state here would force both into a common client boundary for no real gain.
 
 Practical checklist when adding a component:
+
 1. Can it be a Server Component? If yes, make it one.
 2. Does its state need to be visible outside it? If no, keep it local.
 3. If two components share state, find their lowest common ancestor and put it there.
