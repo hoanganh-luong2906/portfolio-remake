@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+
 import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import Navbar from "@/src/components/Navbar";
 import "./globals.css";
 
@@ -17,10 +19,51 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://hoanganhluong.dev";
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+
 export const metadata: Metadata = {
-  title: "Hoang Anh Luong — Front-end Developer",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Hoang Anh Luong — Front-end Developer",
+    template: "%s | HAL",
+  },
   description:
-    "Front-end developer building Next.js apps, design systems, and the web's quieter corners.",
+    "Front-end developer building Next.js apps, design systems, and the web's quieter corners. App Router, Server Components, and the modern React stack.",
+  keywords: [
+    "front-end developer",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "design systems",
+    "UI engineer",
+    "Ho Chi Minh City",
+  ],
+  authors: [{ name: "Hoang Anh Luong", url: SITE_URL }],
+  creator: "Hoang Anh Luong",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: SITE_URL,
+    siteName: "Hoang Anh Luong",
+    title: "Hoang Anh Luong — Front-end Developer",
+    description:
+      "Front-end developer building Next.js apps, design systems, and the web's quieter corners.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hoang Anh Luong — Front-end Developer",
+    description:
+      "Front-end developer building Next.js apps, design systems, and the web's quieter corners.",
+    creator: "@hal_dev",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
+  alternates: { canonical: SITE_URL },
 };
 
 export default function RootLayout({
@@ -30,6 +73,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${plusJakarta.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
     >
       <head>
         {/* No-FOUC theme bootstrap — reads localStorage before first paint */}
@@ -39,7 +83,18 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
+        {GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`}
+            </Script>
+          </>
+        )}
         <Navbar />
         {children}
       </body>
