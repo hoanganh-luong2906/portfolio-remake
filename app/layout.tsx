@@ -98,6 +98,8 @@ export default function RootLayout({
         )}
         {children}
       </body>
+
+      {/* Vercel analytic tools */}
       <SpeedInsights />
       <Analytics />
     </html>
