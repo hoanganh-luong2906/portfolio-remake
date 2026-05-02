@@ -1,16 +1,16 @@
 import type { NewPost } from "../schema";
 import { desc, eq } from "drizzle-orm";
 import { verifySession } from "../../dal";
-import { db } from "../index";
+import { getDb } from "../index";
 import { posts } from "../schema";
 
 export async function getAllPosts() {
   await verifySession();
-  return db.select().from(posts).orderBy(desc(posts.createdAt));
+  return getDb().select().from(posts).orderBy(desc(posts.createdAt));
 }
 
 export function getPublishedPosts() {
-  return db
+  return getDb()
     .select()
     .from(posts)
     .where(eq(posts.published, true))
@@ -18,7 +18,7 @@ export function getPublishedPosts() {
 }
 
 export function getPostBySlug(slug: string) {
-  return db
+  return getDb()
     .select()
     .from(posts)
     .where(eq(posts.slug, slug))
@@ -27,7 +27,7 @@ export function getPostBySlug(slug: string) {
 
 export async function getPostById(id: number) {
   await verifySession();
-  return db
+  return getDb()
     .select()
     .from(posts)
     .where(eq(posts.id, id))
@@ -35,7 +35,7 @@ export async function getPostById(id: number) {
 }
 
 export function createPost(data: NewPost) {
-  return db
+  return getDb()
     .insert(posts)
     .values(data)
     .returning()
@@ -43,7 +43,7 @@ export function createPost(data: NewPost) {
 }
 
 export function updatePost(id: number, data: Partial<NewPost>) {
-  return db
+  return getDb()
     .update(posts)
     .set({ ...data, updatedAt: new Date() })
     .where(eq(posts.id, id))
@@ -52,5 +52,5 @@ export function updatePost(id: number, data: Partial<NewPost>) {
 }
 
 export function deletePost(id: number) {
-  return db.delete(posts).where(eq(posts.id, id));
+  return getDb().delete(posts).where(eq(posts.id, id));
 }
