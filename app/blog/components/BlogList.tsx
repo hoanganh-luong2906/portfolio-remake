@@ -1,62 +1,44 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { useState } from "react";
-import ProjectArt from "../../../src/components/project-art";
-import { PORTFOLIO_DATA } from "../../../src/lib/data";
-import FeaturedPost from "./FeaturedPost";
+import Link from 'next/link'
+import { useState } from 'react'
+import ProjectArt from '../../../src/components/project-art'
+import type { Post } from '../../../src/lib/db/schema'
+import { formatDate, readTime } from '../../../src/lib/utils'
+import FeaturedPost from './FeaturedPost'
 
-export default function BlogList() {
-  const D = PORTFOLIO_DATA;
-  const [filter, setFilter] = useState("All");
+export default function BlogList({ posts }: { posts: Post[] }) {
+  const [filter, setFilter] = useState('All')
 
-  const categories = [
-    "All",
-    ...Array.from(new Set(D.blog.map((p) => p.category))),
-  ];
-  const [featured, ...rest] = D.blog;
-  const filtered =
-    filter === "All" ? rest : rest.filter((p) => p.category === filter);
+  if (posts.length === 0) {
+    return (
+      <section className="shell pb-[100px]">
+        <div className="text-center text-fg-muted py-20">No posts published yet.</div>
+      </section>
+    )
+  }
+
+  const categories = ['All', ...Array.from(new Set(posts.map((p) => p.category)))]
+  const [featured, ...rest] = posts
+  const filtered = filter === 'All' ? rest : rest.filter((p) => p.category === filter)
 
   return (
     <>
       <FeaturedPost post={featured} />
 
-      <section className="shell" style={{ paddingBottom: 100 }}>
-        <div
-          className="reveal"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingBottom: 28,
-            borderBottom: "1px solid var(--line)",
-            marginBottom: 40,
-            flexWrap: "wrap",
-            gap: 16,
-          }}
-        >
-          <div className="mono" style={{ color: "var(--fg-muted)" }}>
-            ◍ ALL POSTS — {filtered.length}
-          </div>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+      <section className="shell pb-[100px]">
+        <div className="reveal flex justify-between items-center pb-7 border-b border-line mb-10 flex-wrap gap-4">
+          <div className="mono text-fg-muted">◍ ALL POSTS — {filtered.length}</div>
+          <div className="flex gap-2 flex-wrap">
             {categories.map((c) => (
               <button
                 key={c}
                 onClick={() => setFilter(c)}
+                className="h-[30px] px-3.5 rounded-full text-xs font-semibold tracking-[0.02em] border transition-all duration-[250ms]"
                 style={{
-                  height: 30,
-                  padding: "0 14px",
-                  borderRadius: 999,
-                  fontSize: 12,
-                  fontWeight: 600,
-                  letterSpacing: "0.02em",
-                  border: "1px solid",
-                  borderColor: filter === c ? "var(--accent)" : "var(--line)",
-                  background: filter === c ? "var(--accent)" : "transparent",
-                  color: filter === c ? "#111" : "var(--fg-muted)",
-                  cursor: "pointer",
-                  transition: "all .25s ease",
+                  borderColor: filter === c ? 'var(--accent)' : 'var(--line)',
+                  background: filter === c ? 'var(--accent)' : 'transparent',
+                  color: filter === c ? '#111' : 'var(--fg-muted)',
                 }}
               >
                 {c}
@@ -65,118 +47,45 @@ export default function BlogList() {
           </div>
         </div>
 
-        <div
-          className="reveal"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 16,
-          }}
-        >
+        <div className="reveal grid grid-cols-3 gap-4">
           {filtered.map((post) => (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="glass blog-card"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                padding: 0,
-                overflow: "hidden",
-              }}
+              className="glass blog-card flex flex-col p-0 overflow-hidden"
             >
-              <div
-                style={{
-                  aspectRatio: "16/10",
-                  background: "var(--bg-3)",
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-              >
-                <ProjectArt kind={post.cover} animated={false} />
-                <div style={{ position: "absolute", left: 14, top: 14 }}>
+              <div className="aspect-[16/10] bg-bg-3 relative overflow-hidden">
+                <ProjectArt kind={post.cover as import("@/src/lib/data").ArtKind} animated={false} />
+                <div className="absolute left-3.5 top-3.5">
                   <span
                     className="chip"
                     style={{
-                      background: "rgba(0,0,0,0.55)",
-                      color: "#fff",
-                      borderColor: "rgba(255,255,255,0.18)",
+                      background: 'rgba(0,0,0,0.55)',
+                      color: '#fff',
+                      borderColor: 'rgba(255,255,255,0.18)',
                     }}
                   >
                     {post.category}
                   </span>
                 </div>
               </div>
-              <div
-                style={{
-                  padding: 28,
-                  display: "flex",
-                  flexDirection: "column",
-                  flex: 1,
-                }}
-              >
-                <div
-                  className="mono"
-                  style={{
-                    color: "var(--fg-muted)",
-                    marginBottom: 14,
-                    fontSize: 11,
-                  }}
-                >
-                  {post.date} · {post.readTime}
+              <div className="p-7 flex flex-col flex-1">
+                <div className="mono text-fg-muted mb-3.5 text-[11px]">
+                  {formatDate(post.createdAt)} · {readTime(post.body)}
                 </div>
-                <h3
-                  style={{
-                    margin: 0,
-                    fontSize: 22,
-                    fontWeight: 500,
-                    letterSpacing: "-0.01em",
-                    lineHeight: 1.25,
-                  }}
-                >
+                <h3 className="m-0 text-[22px] font-medium tracking-[-0.01em] leading-[1.25]">
                   {post.title}
                 </h3>
-                <p
-                  className="body"
-                  style={{
-                    marginTop: 14,
-                    marginBottom: 20,
-                    fontSize: 14,
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {post.excerpt}
-                </p>
-                <div
-                  style={{
-                    marginTop: "auto",
-                    paddingTop: 16,
-                    borderTop: "1px solid var(--line)",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+                <p className="body mt-3.5 mb-5 text-sm leading-[1.7]">{post.excerpt}</p>
+                <div className="mt-auto pt-4 border-t border-line flex justify-between items-center">
+                  <div className="flex gap-1 flex-wrap">
                     {post.tags.slice(0, 2).map((t) => (
-                      <span
-                        key={t}
-                        className="chip"
-                        style={{ height: 22, fontSize: 10 }}
-                      >
+                      <span key={t} className="chip" style={{ height: 22, fontSize: 10 }}>
                         #{t}
                       </span>
                     ))}
                   </div>
-                  <span
-                    style={{
-                      color: "var(--accent)",
-                      fontWeight: 600,
-                      fontSize: 12,
-                    }}
-                  >
-                    Read →
-                  </span>
+                  <span className="text-accent font-semibold text-xs">Read →</span>
                 </div>
               </div>
             </Link>
@@ -184,5 +93,5 @@ export default function BlogList() {
         </div>
       </section>
     </>
-  );
+  )
 }

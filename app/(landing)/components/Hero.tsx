@@ -148,14 +148,16 @@ export default function Hero() {
             </div>
           </div>
 
-          <Image
-            src="/images/portrait-img.png"
-            alt="Hoang Anh Luong"
-            width={572}
-            height={300}
-            unoptimized
-            objectFit="contain"
-          />
+          <div className="reveal" style={{ transitionDelay: "200ms" }}>
+            <Image
+              src="/images/portrait-img.png"
+              alt="Hoang Anh Luong"
+              width={572}
+              height={300}
+              unoptimized
+              objectFit="contain"
+            />
+          </div>
         </div>
       </div>
 

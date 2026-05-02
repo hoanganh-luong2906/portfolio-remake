@@ -2,16 +2,18 @@
 
 import { useEffect, useState } from "react";
 
-function getInitialTheme(): "dark" | "light" {
-  if (typeof document === "undefined") return "dark";
-  return (
-    (document.documentElement.getAttribute("data-theme") as "dark" | "light") ||
-    "dark"
-  );
-}
-
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"dark" | "light">(getInitialTheme);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  useEffect(() => {
+    const stored = localStorage.getItem("hal-theme");
+    if (stored === "dark" || stored === "light") {
+      setTheme(stored);
+    } else {
+      const attr = document.documentElement.getAttribute("data-theme");
+      if (attr === "light") setTheme("light");
+    }
+  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);

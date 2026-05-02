@@ -553,3 +553,270 @@ button {
   transform: translateY(-4px);
   border-color: var(--line-2) !important;
 }
+
+/* Blog post markdown body */
+.prose-blog {
+  color: var(--fg);
+}
+.prose-blog h2 {
+  margin: 2.5rem 0 1rem;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+.prose-blog h3 {
+  margin: 2rem 0 0.75rem;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.prose-blog p {
+  margin: 0 0 1.5rem;
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--fg);
+  opacity: 0.82;
+}
+.prose-blog a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-blog blockquote {
+  margin: 2rem 0;
+  padding: 1.5rem 1.75rem;
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.5;
+}
+.prose-blog ul,
+.prose-blog ol {
+  margin: 0 0 1.5rem;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.prose-blog li {
+  font-size: 17px;
+  line-height: 1.7;
+  opacity: 0.82;
+}
+.prose-blog pre {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--code-bg);
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.prose-blog code {
+  font-family: var(--font-jetbrains-mono, 'JetBrains Mono'), ui-monospace, monospace;
+  font-size: 0.88em;
+}
+.prose-blog :not(pre) > code {
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  background: var(--code-bg);
+  border: 1px solid var(--line);
+}
+.prose-blog hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 2.5rem 0;
+}
+.prose-blog img {
+  border-radius: 12px;
+  margin: 1.5rem 0;
+}
+
+/* Admin markdown preview — react-markdown rendered inside the editor split/preview pane */
+.admin-preview {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--fg);
+  overflow-y: auto;
+}
+.admin-preview h1 {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+  line-height: 1.2;
+  color: var(--fg);
+}
+.admin-preview h2 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin: 24px 0 10px;
+  color: var(--fg);
+}
+.admin-preview h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 20px 0 8px;
+  color: var(--fg);
+}
+.admin-preview p {
+  margin: 0 0 12px;
+  color: var(--fg-muted);
+}
+.admin-preview a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.admin-preview blockquote {
+  margin: 16px 0;
+  padding: 12px 16px;
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--fg);
+}
+.admin-preview blockquote > :last-child { margin-bottom: 0; }
+.admin-preview ul,
+.admin-preview ol {
+  margin: 0 0 12px;
+  padding-left: 20px;
+  color: var(--fg-muted);
+}
+.admin-preview li { margin-bottom: 4px; }
+.admin-preview pre {
+  margin: 12px 0;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--code-bg);
+  overflow-x: auto;
+  font-family: var(--font-jetbrains-mono, 'JetBrains Mono'), ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.admin-preview code {
+  font-family: var(--font-jetbrains-mono, 'JetBrains Mono'), ui-monospace, monospace;
+  font-size: 0.9em;
+}
+.admin-preview :not(pre) > code {
+  background: var(--surface-2);
+  color: var(--accent);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+}
+.admin-preview strong { font-weight: 700; color: var(--fg); }
+.admin-preview hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 20px 0;
+}
+.admin-preview table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 12px 0;
+  font-size: 13px;
+}
+.admin-preview table th {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  padding: 7px 11px;
+  text-align: left;
+  font-weight: 600;
+}
+.admin-preview table td {
+  border: 1px solid var(--line);
+  padding: 7px 11px;
+}
+.admin-preview::-webkit-scrollbar { width: 6px; }
+.admin-preview::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 6px; }
+.admin-preview::-webkit-scrollbar-track { background: transparent; }
+
+/* ─── Custom markdown editor ─────────────────────────────────────────────── */
+
+/* Shared metrics — pre and textarea MUST match exactly */
+.editor-pre,
+.editor-textarea {
+  padding: 22px 26px;
+  font-family: var(--font-jetbrains-mono, "JetBrains Mono"), ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  tab-size: 2;
+}
+
+/* Highlighted layer — sits under the transparent textarea */
+.editor-pre {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  pointer-events: none;
+  overflow-y: hidden; /* scrollTop synced via JS */
+  color: var(--fg);
+  background: transparent;
+  border: none;
+}
+
+/* Input layer — text invisible so pre shows through */
+.editor-textarea {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  color: transparent;
+  caret-color: var(--accent);
+  border: none;
+  outline: none;
+  resize: none;
+  overflow-y: auto;
+}
+.editor-textarea::-webkit-scrollbar { width: 6px; }
+.editor-textarea::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 6px; }
+.editor-textarea::-webkit-scrollbar-track { background: transparent; }
+.editor-textarea::selection { background: color-mix(in oklab, var(--accent) 35%, transparent); color: transparent; }
+
+/* Toolbar buttons */
+.toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 5px;
+  color: var(--fg-muted);
+  transition: background 0.12s ease, color 0.12s ease;
+  flex-shrink: 0;
+}
+.toolbar-btn:hover {
+  background: var(--surface-2);
+  color: var(--fg);
+}
+
+/* Syntax highlight spans */
+.mds-hmark  { color: var(--accent); opacity: 0.55; }
+.mds-heading { color: var(--fg); font-weight: 600; }
+.mds-b      { color: var(--fg); font-weight: 700; }
+.mds-i      { color: var(--fg-muted); font-style: italic; }
+.mds-bi     { color: var(--fg); font-weight: 700; font-style: italic; }
+.mds-c      { color: var(--accent); }
+.mds-p      { color: var(--fg-dim); }
+.mds-bqmark { color: var(--accent); }
+.mds-bq     { color: var(--fg-muted); font-style: italic; }
+.mds-lmark  { color: var(--accent); }
+.mds-fence  { color: var(--fg-dim); }
+.mds-lang   { color: var(--accent-2); }
+.mds-code-line { color: var(--fg-muted); }
+.mds-hr     { color: var(--fg-dim); }
+.mds-lt     { color: var(--fg); }
+.mds-lu     { color: var(--fg-dim); text-decoration: underline; text-underline-offset: 2px; }
