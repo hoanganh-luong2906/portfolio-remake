@@ -1,12 +1,7 @@
 import Link from "next/link";
-import { getAllPosts } from "@/src/lib/db/queries/posts";
 import PostsListClient from "../components/PostsListClient";
 
-export const dynamic = "force-dynamic";
-
-export default async function AdminPostsPage() {
-  const allPosts = await getAllPosts();
-
+export default function AdminPostsPage() {
   return (
     <div style={{ padding: "44px 36px 80px" }}>
       <div
@@ -43,7 +38,7 @@ export default async function AdminPostsPage() {
         </Link>
       </div>
 
-      <PostsListClient posts={allPosts} />
+      <PostsListClient />
     </div>
   );
 }

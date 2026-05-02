@@ -1,5 +1,5 @@
-import NextAuth from 'next-auth'
-import Google from 'next-auth/providers/google'
+import NextAuth from "next-auth";
+import Google from "next-auth/providers/google";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -9,15 +9,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   pages: {
-    signIn: '/login',
-    error: '/login',
+    signIn: "/login",
+    error: "/login",
   },
   callbacks: {
     authorized({ auth: session, request: { nextUrl } }) {
-      const isLoggedIn = !!session?.user
-      const isAdminRoute = nextUrl.pathname.startsWith('/admin')
-      if (isAdminRoute) return isLoggedIn
-      return true
+      const isLoggedIn = !!session?.user;
+      const isAdminRoute = nextUrl.pathname.startsWith("/admin");
+      if (isAdminRoute) return isLoggedIn;
+      return true;
     },
   },
-})
+});

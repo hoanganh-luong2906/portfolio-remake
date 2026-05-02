@@ -1,12 +1,14 @@
-import Link from "next/link";
-import { auth } from "@/auth";
-import { getAllPosts } from "@/src/lib/db/queries/posts";
+"use client";
 
-export default async function AdminPage() {
-  const [session, allPosts] = await Promise.all([auth(), getAllPosts()]);
+import Link from "next/link";
+import { useAuth } from "@/app/hooks/useAuth";
+import { usePosts } from "@/app/hooks/usePost";
+
+export default function AdminPage() {
+  const { firstName } = useAuth();
+  const { data: allPosts = [] } = usePosts();
   const published = allPosts.filter((p) => p.published).length;
   const drafts = allPosts.length - published;
-  const firstName = session?.user?.name?.split(" ")[0] || "there";
 
   const recent = [...allPosts]
     .sort(
@@ -26,7 +28,7 @@ export default async function AdminPage() {
           className="h-section"
           style={{ margin: 0, fontSize: "clamp(40px, 5vw, 64px)" }}
         >
-          Good to see you, {firstName}
+          Good to see you, {firstName ?? "there"}
           <span style={{ color: "var(--accent)" }}>.</span>
         </h1>
         <p

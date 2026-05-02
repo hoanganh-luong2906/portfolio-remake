@@ -1,5 +1,5 @@
 /* Personal Portfolio — HAL */
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* Register design tokens — enables bg-bg, text-fg-muted, border-line, etc. */
 @theme inline {
@@ -617,7 +617,7 @@ button {
   line-height: 1.7;
 }
 .prose-blog code {
-  font-family: var(--font-jetbrains-mono, 'JetBrains Mono'), ui-monospace, monospace;
+  font-family: var(--font-jetbrains-mono, "JetBrains Mono"), ui-monospace, monospace;
   font-size: 0.88em;
 }
 .prose-blog :not(pre) > code {
@@ -683,14 +683,18 @@ button {
   font-style: italic;
   color: var(--fg);
 }
-.admin-preview blockquote > :last-child { margin-bottom: 0; }
+.admin-preview blockquote > :last-child {
+  margin-bottom: 0;
+}
 .admin-preview ul,
 .admin-preview ol {
   margin: 0 0 12px;
   padding-left: 20px;
   color: var(--fg-muted);
 }
-.admin-preview li { margin-bottom: 4px; }
+.admin-preview li {
+  margin-bottom: 4px;
+}
 .admin-preview pre {
   margin: 12px 0;
   padding: 14px 16px;
@@ -698,12 +702,12 @@ button {
   border: 1px solid var(--line);
   background: var(--code-bg);
   overflow-x: auto;
-  font-family: var(--font-jetbrains-mono, 'JetBrains Mono'), ui-monospace, monospace;
+  font-family: var(--font-jetbrains-mono, "JetBrains Mono"), ui-monospace, monospace;
   font-size: 12px;
   line-height: 1.65;
 }
 .admin-preview code {
-  font-family: var(--font-jetbrains-mono, 'JetBrains Mono'), ui-monospace, monospace;
+  font-family: var(--font-jetbrains-mono, "JetBrains Mono"), ui-monospace, monospace;
   font-size: 0.9em;
 }
 .admin-preview :not(pre) > code {
@@ -713,7 +717,10 @@ button {
   border-radius: 4px;
   border: 1px solid var(--line);
 }
-.admin-preview strong { font-weight: 700; color: var(--fg); }
+.admin-preview strong {
+  font-weight: 700;
+  color: var(--fg);
+}
 .admin-preview hr {
   border: none;
   border-top: 1px solid var(--line);
@@ -736,9 +743,16 @@ button {
   border: 1px solid var(--line);
   padding: 7px 11px;
 }
-.admin-preview::-webkit-scrollbar { width: 6px; }
-.admin-preview::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 6px; }
-.admin-preview::-webkit-scrollbar-track { background: transparent; }
+.admin-preview::-webkit-scrollbar {
+  width: 6px;
+}
+.admin-preview::-webkit-scrollbar-thumb {
+  background: var(--line-2);
+  border-radius: 6px;
+}
+.admin-preview::-webkit-scrollbar-track {
+  background: transparent;
+}
 
 /* ─── Custom markdown editor ─────────────────────────────────────────────── */
 
@@ -781,10 +795,20 @@ button {
   resize: none;
   overflow-y: auto;
 }
-.editor-textarea::-webkit-scrollbar { width: 6px; }
-.editor-textarea::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 6px; }
-.editor-textarea::-webkit-scrollbar-track { background: transparent; }
-.editor-textarea::selection { background: color-mix(in oklab, var(--accent) 35%, transparent); color: transparent; }
+.editor-textarea::-webkit-scrollbar {
+  width: 6px;
+}
+.editor-textarea::-webkit-scrollbar-thumb {
+  background: var(--line-2);
+  border-radius: 6px;
+}
+.editor-textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+.editor-textarea::selection {
+  background: color-mix(in oklab, var(--accent) 35%, transparent);
+  color: transparent;
+}
 
 /* Toolbar buttons */
 .toolbar-btn {
@@ -795,7 +819,9 @@ button {
   height: 26px;
   border-radius: 5px;
   color: var(--fg-muted);
-  transition: background 0.12s ease, color 0.12s ease;
+  transition:
+    background 0.12s ease,
+    color 0.12s ease;
   flex-shrink: 0;
 }
 .toolbar-btn:hover {
@@ -804,19 +830,60 @@ button {
 }
 
 /* Syntax highlight spans */
-.mds-hmark  { color: var(--accent); opacity: 0.55; }
-.mds-heading { color: var(--fg); font-weight: 600; }
-.mds-b      { color: var(--fg); font-weight: 700; }
-.mds-i      { color: var(--fg-muted); font-style: italic; }
-.mds-bi     { color: var(--fg); font-weight: 700; font-style: italic; }
-.mds-c      { color: var(--accent); }
-.mds-p      { color: var(--fg-dim); }
-.mds-bqmark { color: var(--accent); }
-.mds-bq     { color: var(--fg-muted); font-style: italic; }
-.mds-lmark  { color: var(--accent); }
-.mds-fence  { color: var(--fg-dim); }
-.mds-lang   { color: var(--accent-2); }
-.mds-code-line { color: var(--fg-muted); }
-.mds-hr     { color: var(--fg-dim); }
-.mds-lt     { color: var(--fg); }
-.mds-lu     { color: var(--fg-dim); text-decoration: underline; text-underline-offset: 2px; }
+.mds-hmark {
+  color: var(--accent);
+  opacity: 0.55;
+}
+.mds-heading {
+  color: var(--fg);
+  font-weight: 600;
+}
+.mds-b {
+  color: var(--fg);
+  font-weight: 700;
+}
+.mds-i {
+  color: var(--fg-muted);
+  font-style: italic;
+}
+.mds-bi {
+  color: var(--fg);
+  font-weight: 700;
+  font-style: italic;
+}
+.mds-c {
+  color: var(--accent);
+}
+.mds-p {
+  color: var(--fg-dim);
+}
+.mds-bqmark {
+  color: var(--accent);
+}
+.mds-bq {
+  color: var(--fg-muted);
+  font-style: italic;
+}
+.mds-lmark {
+  color: var(--accent);
+}
+.mds-fence {
+  color: var(--fg-dim);
+}
+.mds-lang {
+  color: var(--accent-2);
+}
+.mds-code-line {
+  color: var(--fg-muted);
+}
+.mds-hr {
+  color: var(--fg-dim);
+}
+.mds-lt {
+  color: var(--fg);
+}
+.mds-lu {
+  color: var(--fg-dim);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

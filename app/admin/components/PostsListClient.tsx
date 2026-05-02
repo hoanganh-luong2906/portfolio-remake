@@ -1,77 +1,99 @@
-'use client'
+"use client";
 
-import { useState, useMemo, useTransition } from 'react'
-import Link from 'next/link'
-import { togglePublishAction, deletePostAction } from '@/src/lib/actions/posts'
-import type { Post } from '@/src/lib/db/schema'
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import { useDeletePost, usePosts, useUpdatePost } from "@/app/hooks/usePost";
 
-interface Props {
-  posts: Post[]
-}
-
-export default function PostsListClient({ posts: initialPosts }: Props) {
-  const [posts, setPosts] = useState(initialPosts)
-  const [filter, setFilter] = useState<'all' | 'published' | 'drafts'>('all')
-  const [query, setQuery] = useState('')
-  const [isPending, startTransition] = useTransition()
+export default function PostsListClient() {
+  const { data: posts = [], isLoading } = usePosts();
+  const updateMutation = useUpdatePost();
+  const deleteMutation = useDeletePost();
+  const [filter, setFilter] = useState<"all" | "published" | "drafts">("all");
+  const [query, setQuery] = useState("");
 
   const filtered = useMemo(() => {
     return posts
       .filter((p) =>
-        filter === 'all' ? true : filter === 'published' ? p.published : !p.published
+        filter === "all"
+          ? true
+          : filter === "published"
+            ? p.published
+            : !p.published,
       )
       .filter(
         (p) =>
           !query ||
           p.title.toLowerCase().includes(query.toLowerCase()) ||
-          p.tags.join(' ').toLowerCase().includes(query.toLowerCase())
+          p.tags.join(" ").toLowerCase().includes(query.toLowerCase()),
       )
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-  }, [posts, filter, query])
+      .sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+      );
+  }, [posts, filter, query]);
 
   const handleToggle = (id: number, published: boolean) => {
-    startTransition(async () => {
-      await togglePublishAction(id, !published)
-      setPosts((ps) => ps.map((p) => (p.id === id ? { ...p, published: !p.published } : p)))
-    })
-  }
+    updateMutation.mutate({ id, data: { published: !published } });
+  };
 
   const handleDelete = (id: number) => {
-    if (!confirm('Delete this post? Cannot be undone.')) return
-    startTransition(async () => {
-      await deletePostAction(id)
-      setPosts((ps) => ps.filter((p) => p.id !== id))
-    })
-  }
+    // eslint-disable-next-line no-alert
+    if (!confirm("Delete this post? Cannot be undone.")) return;
+    deleteMutation.mutate(id);
+  };
 
   const filterOpts = [
-    { id: 'all' as const, label: 'All', count: posts.length },
-    { id: 'published' as const, label: 'Published', count: posts.filter((p) => p.published).length },
-    { id: 'drafts' as const, label: 'Drafts', count: posts.filter((p) => !p.published).length },
-  ]
+    { id: "all" as const, label: "All", count: posts.length },
+    {
+      id: "published" as const,
+      label: "Published",
+      count: posts.filter((p) => p.published).length,
+    },
+    {
+      id: "drafts" as const,
+      label: "Drafts",
+      count: posts.filter((p) => !p.published).length,
+    },
+  ];
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          padding: "60px 0",
+          textAlign: "center",
+          color: "var(--fg-muted)",
+        }}
+      >
+        Loading posts…
+      </div>
+    );
+  }
+
+  const isMutating = updateMutation.isPending || deleteMutation.isPending;
 
   return (
-    <div style={{ opacity: isPending ? 0.7 : 1, transition: 'opacity 0.2s' }}>
+    <div style={{ opacity: isMutating ? 0.7 : 1, transition: "opacity 0.2s" }}>
       {/* Filter & search */}
       <div
         className="glass"
         style={{
           padding: 12,
           borderRadius: 14,
-          display: 'flex',
+          display: "flex",
           gap: 10,
-          alignItems: 'center',
+          alignItems: "center",
           marginBottom: 18,
         }}
       >
         <div
           style={{
-            display: 'flex',
+            display: "flex",
             gap: 4,
             padding: 4,
-            background: 'var(--surface)',
+            background: "var(--surface)",
             borderRadius: 10,
-            border: '1px solid var(--line)',
+            border: "1px solid var(--line)",
           }}
         >
           {filterOpts.map((f) => (
@@ -79,33 +101,39 @@ export default function PostsListClient({ posts: initialPosts }: Props) {
               key={f.id}
               onClick={() => setFilter(f.id)}
               style={{
-                padding: '8px 14px',
+                padding: "8px 14px",
                 fontSize: 12,
                 fontWeight: 600,
                 borderRadius: 7,
-                background: filter === f.id ? 'var(--surface-2)' : 'transparent',
-                color: filter === f.id ? 'var(--fg)' : 'var(--fg-muted)',
-                border: filter === f.id ? '1px solid var(--line)' : '1px solid transparent',
-                display: 'inline-flex',
-                alignItems: 'center',
+                background:
+                  filter === f.id ? "var(--surface-2)" : "transparent",
+                color: filter === f.id ? "var(--fg)" : "var(--fg-muted)",
+                border:
+                  filter === f.id
+                    ? "1px solid var(--line)"
+                    : "1px solid transparent",
+                display: "inline-flex",
+                alignItems: "center",
                 gap: 8,
               }}
             >
               {f.label}
-              <span style={{ fontSize: 10, color: 'var(--fg-dim)' }}>{f.count}</span>
+              <span style={{ fontSize: 10, color: "var(--fg-dim)" }}>
+                {f.count}
+              </span>
             </button>
           ))}
         </div>
         <div
           style={{
             flex: 1,
-            display: 'flex',
-            alignItems: 'center',
+            display: "flex",
+            alignItems: "center",
             gap: 10,
-            padding: '0 14px',
+            padding: "0 14px",
             height: 40,
-            background: 'var(--surface)',
-            border: '1px solid var(--line)',
+            background: "var(--surface)",
+            border: "1px solid var(--line)",
             borderRadius: 10,
           }}
         >
@@ -116,7 +144,7 @@ export default function PostsListClient({ posts: initialPosts }: Props) {
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
-            style={{ color: 'var(--fg-dim)', flexShrink: 0 }}
+            style={{ color: "var(--fg-dim)", flexShrink: 0 }}
           >
             <circle cx="11" cy="11" r="7" />
             <path d="M21 21l-4.3-4.3" />
@@ -127,10 +155,10 @@ export default function PostsListClient({ posts: initialPosts }: Props) {
             placeholder="Search by title or tag…"
             style={{
               flex: 1,
-              background: 'transparent',
+              background: "transparent",
               border: 0,
-              outline: 'none',
-              color: 'var(--fg)',
+              outline: "none",
+              color: "var(--fg)",
               fontSize: 13,
             }}
           />
@@ -138,27 +166,37 @@ export default function PostsListClient({ posts: initialPosts }: Props) {
       </div>
 
       {/* Table */}
-      <div className="glass" style={{ borderRadius: 14, overflow: 'hidden' }}>
+      <div className="glass" style={{ borderRadius: 14, overflow: "hidden" }}>
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 150px 130px 130px 220px',
-            padding: '14px 20px',
+            display: "grid",
+            gridTemplateColumns: "1fr 150px 130px 130px 220px",
+            padding: "14px 20px",
             gap: 16,
-            borderBottom: '1px solid var(--line)',
-            background: 'var(--surface)',
+            borderBottom: "1px solid var(--line)",
+            background: "var(--surface)",
           }}
           className="mono"
         >
-          <span style={{ color: 'var(--fg-dim)', fontSize: 10 }}>TITLE</span>
-          <span style={{ color: 'var(--fg-dim)', fontSize: 10 }}>CATEGORY</span>
-          <span style={{ color: 'var(--fg-dim)', fontSize: 10 }}>STATUS</span>
-          <span style={{ color: 'var(--fg-dim)', fontSize: 10 }}>UPDATED</span>
-          <span style={{ color: 'var(--fg-dim)', fontSize: 10, textAlign: 'right' }}>ACTIONS</span>
+          <span style={{ color: "var(--fg-dim)", fontSize: 10 }}>TITLE</span>
+          <span style={{ color: "var(--fg-dim)", fontSize: 10 }}>CATEGORY</span>
+          <span style={{ color: "var(--fg-dim)", fontSize: 10 }}>STATUS</span>
+          <span style={{ color: "var(--fg-dim)", fontSize: 10 }}>UPDATED</span>
+          <span
+            style={{ color: "var(--fg-dim)", fontSize: 10, textAlign: "right" }}
+          >
+            ACTIONS
+          </span>
         </div>
 
         {filtered.length === 0 ? (
-          <div style={{ padding: 60, textAlign: 'center', color: 'var(--fg-muted)' }}>
+          <div
+            style={{
+              padding: 60,
+              textAlign: "center",
+              color: "var(--fg-muted)",
+            }}
+          >
             No posts match.
           </div>
         ) : (
@@ -166,12 +204,12 @@ export default function PostsListClient({ posts: initialPosts }: Props) {
             <div
               key={p.id}
               style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 150px 130px 130px 220px',
-                padding: '16px 20px',
+                display: "grid",
+                gridTemplateColumns: "1fr 150px 130px 130px 220px",
+                padding: "16px 20px",
                 gap: 16,
-                alignItems: 'center',
-                borderBottom: '1px solid var(--line)',
+                alignItems: "center",
+                borderBottom: "1px solid var(--line)",
               }}
             >
               <div style={{ minWidth: 0 }}>
@@ -180,17 +218,17 @@ export default function PostsListClient({ posts: initialPosts }: Props) {
                   style={{
                     fontSize: 14,
                     fontWeight: 600,
-                    display: 'block',
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
+                    display: "block",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
                   }}
                 >
                   {p.title}
                 </Link>
                 <div
                   className="mono"
-                  style={{ fontSize: 10, color: 'var(--fg-dim)', marginTop: 4 }}
+                  style={{ fontSize: 10, color: "var(--fg-dim)", marginTop: 4 }}
                 >
                   /{p.slug}
                 </div>
@@ -206,59 +244,64 @@ export default function PostsListClient({ posts: initialPosts }: Props) {
                   height: 26,
                   fontSize: 11,
                   background: p.published
-                    ? 'color-mix(in oklab, var(--accent) 14%, transparent)'
-                    : 'var(--surface-2)',
-                  color: p.published ? 'var(--accent)' : 'var(--fg-muted)',
+                    ? "color-mix(in oklab, var(--accent) 14%, transparent)"
+                    : "var(--surface-2)",
+                  color: p.published ? "var(--accent)" : "var(--fg-muted)",
                   borderColor: p.published
-                    ? 'color-mix(in oklab, var(--accent) 30%, transparent)'
-                    : 'var(--line)',
+                    ? "color-mix(in oklab, var(--accent) 30%, transparent)"
+                    : "var(--line)",
                 }}
               >
                 <span
                   style={{
                     width: 6,
                     height: 6,
-                    borderRadius: '50%',
-                    background: p.published ? 'var(--accent)' : 'var(--fg-dim)',
+                    borderRadius: "50%",
+                    background: p.published ? "var(--accent)" : "var(--fg-dim)",
                     flexShrink: 0,
                   }}
                 />
-                {p.published ? 'Published' : 'Draft'}
+                {p.published ? "Published" : "Draft"}
               </span>
 
-              <div className="mono" style={{ fontSize: 11, color: 'var(--fg-muted)' }}>
+              <div
+                className="mono"
+                style={{ fontSize: 11, color: "var(--fg-muted)" }}
+              >
                 {new Date(p.updatedAt).toLocaleDateString()}
               </div>
 
-              <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
+              <div
+                style={{ display: "flex", gap: 6, justifyContent: "flex-end" }}
+              >
                 <button
                   onClick={() => handleToggle(p.id, p.published)}
                   style={{
                     height: 32,
-                    padding: '0 12px',
+                    padding: "0 12px",
                     fontSize: 11,
                     fontWeight: 600,
                     borderRadius: 7,
-                    background: 'var(--surface-2)',
-                    border: '1px solid var(--line)',
-                    color: 'var(--fg)',
+                    background: "var(--surface-2)",
+                    border: "1px solid var(--line)",
+                    color: "var(--fg)",
                   }}
                 >
-                  {p.published ? 'Unpublish' : 'Publish'}
+                  {p.published ? "Unpublish" : "Publish"}
                 </button>
                 <Link
                   href={`/admin/posts/${p.id}`}
                   style={{
                     height: 32,
-                    padding: '0 12px',
+                    padding: "0 12px",
                     fontSize: 11,
                     fontWeight: 600,
                     borderRadius: 7,
-                    background: 'var(--surface-2)',
-                    border: '1px solid var(--line)',
-                    color: 'var(--fg)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
+                    background: "var(--surface-2)",
+                    border: "1px solid var(--line)",
+                    color: "var(--fg)",
+                    display: "inline-flex",
+                    alignItems: "center",
                   }}
                 >
                   Edit
@@ -269,12 +312,12 @@ export default function PostsListClient({ posts: initialPosts }: Props) {
                     width: 32,
                     height: 32,
                     borderRadius: 7,
-                    background: 'var(--surface-2)',
-                    border: '1px solid var(--line)',
-                    color: 'var(--fg-muted)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    background: "var(--surface-2)",
+                    border: "1px solid var(--line)",
+                    color: "var(--fg-muted)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
                   <svg
@@ -299,11 +342,11 @@ export default function PostsListClient({ posts: initialPosts }: Props) {
       <div
         style={{
           marginTop: 18,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
           fontSize: 12,
-          color: 'var(--fg-muted)',
+          color: "var(--fg-muted)",
         }}
         className="mono"
       >
@@ -313,5 +356,5 @@ export default function PostsListClient({ posts: initialPosts }: Props) {
         <span>REVALIDATE: /blog · /blog/[slug]</span>
       </div>
     </div>
-  )
+  );
 }

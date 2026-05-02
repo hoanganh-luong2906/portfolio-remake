@@ -1,9 +1,8 @@
 import { redirect } from "next/navigation";
-import Providers from "@/app/providers";
+import Navbar from "@/app/(public)/components/Navbar";
 import { auth } from "@/auth";
-import AdminShell from "./components/AdminShell";
 
-export const metadata = { title: "Admin" };
+export const metadata = { title: "Portfolio" };
 
 export default async function AdminLayout({
   children,
@@ -14,8 +13,9 @@ export default async function AdminLayout({
   if (!session?.user) redirect("/login");
 
   return (
-    <Providers>
-      <AdminShell>{children}</AdminShell>
-    </Providers>
+    <section suppressHydrationWarning>
+      <Navbar />
+      {children}
+    </section>
   );
 }

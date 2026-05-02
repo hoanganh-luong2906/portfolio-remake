@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
-import Navbar from "@/src/components/Navbar";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -96,7 +95,6 @@ export default function RootLayout({
             </Script>
           </>
         )}
-        <Navbar />
         {children}
       </body>
       <Analytics />

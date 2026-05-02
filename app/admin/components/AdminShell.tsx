@@ -1,33 +1,30 @@
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
-import { signOut } from 'next-auth/react'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-
-interface User {
-  name?: string | null
-  email?: string | null
-}
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/app/hooks/useAuth";
 
 interface Props {
-  user: User
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const NAV_ITEMS = [
   {
-    id: 'dashboard',
-    label: 'Dashboard',
-    href: '/admin',
+    id: "dashboard",
+    label: "Dashboard",
+    href: "/admin",
     icon: (
-      <path d="M3 13h7V3H3v10zm0 8h7v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" fill="currentColor" />
+      <path
+        d="M3 13h7V3H3v10zm0 8h7v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
+        fill="currentColor"
+      />
     ),
   },
   {
-    id: 'posts',
-    label: 'Posts',
-    href: '/admin/posts',
+    id: "posts",
+    label: "Posts",
+    href: "/admin/posts",
     icon: (
       <path
         d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm2 18H6V4h7v5h5v11z"
@@ -36,17 +33,15 @@ const NAV_ITEMS = [
     ),
   },
   {
-    id: 'new',
-    label: 'New post',
-    href: '/admin/posts/new',
-    icon: (
-      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor" />
-    ),
+    id: "new",
+    label: "New post",
+    href: "/admin/posts/new",
+    icon: <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor" />,
   },
   {
-    id: 'view',
-    label: 'View site',
-    href: '/',
+    id: "view",
+    label: "View site",
+    href: "/",
     icon: (
       <path
         d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7zM19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7z"
@@ -54,89 +49,104 @@ const NAV_ITEMS = [
       />
     ),
   },
-]
+];
 
 function getActive(pathname: string) {
-  if (pathname === '/admin') return 'dashboard'
-  if (pathname === '/admin/posts/new') return 'new'
-  if (pathname.startsWith('/admin/posts')) return 'posts'
-  return 'dashboard'
+  if (pathname === "/admin") return "dashboard";
+  if (pathname === "/admin/posts/new") return "new";
+  if (pathname.startsWith("/admin/posts")) return "posts";
+  return "dashboard";
 }
 
 function getBreadcrumb(pathname: string) {
-  if (pathname === '/admin') {
-    return [{ label: 'Admin', href: '/admin' }, { label: 'Dashboard' }]
+  if (pathname === "/admin") {
+    return [{ label: "Admin", href: "/admin" }, { label: "Dashboard" }];
   }
-  if (pathname === '/admin/posts/new') {
+  if (pathname === "/admin/posts/new") {
     return [
-      { label: 'Admin', href: '/admin' },
-      { label: 'Posts', href: '/admin/posts' },
-      { label: 'New' },
-    ]
+      { label: "Admin", href: "/admin" },
+      { label: "Posts", href: "/admin/posts" },
+      { label: "New" },
+    ];
   }
   if (/^\/admin\/posts\/\d+/.test(pathname)) {
     return [
-      { label: 'Admin', href: '/admin' },
-      { label: 'Posts', href: '/admin/posts' },
-      { label: 'Edit' },
-    ]
+      { label: "Admin", href: "/admin" },
+      { label: "Posts", href: "/admin/posts" },
+      { label: "Edit" },
+    ];
   }
-  if (pathname === '/admin/posts') {
-    return [{ label: 'Admin', href: '/admin' }, { label: 'Posts' }]
+  if (pathname === "/admin/posts") {
+    return [{ label: "Admin", href: "/admin" }, { label: "Posts" }];
   }
-  return [{ label: 'Admin', href: '/admin' }]
+  return [{ label: "Admin", href: "/admin" }];
 }
 
-export default function AdminShell({ user, children }: Props) {
-  const pathname = usePathname()
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
+export default function AdminShell({ children }: Props) {
+  const { user, signOut } = useAuth();
+  const pathname = usePathname();
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
     const t =
-      (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') || 'dark'
-    setTheme(t)
-  }, [])
+      (document.documentElement.getAttribute("data-theme") as
+        | "dark"
+        | "light") || "dark";
+    setTheme(t);
+  }, []);
 
   const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark'
-    setTheme(next)
-    document.documentElement.setAttribute('data-theme', next)
-    document.body.setAttribute('data-theme', next)
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.setAttribute("data-theme", next);
+    document.body.setAttribute("data-theme", next);
     try {
-      localStorage.setItem('hal-theme', next)
+      localStorage.setItem("hal-theme", next);
     } catch {}
-  }
+  };
 
-  const active = getActive(pathname)
-  const breadcrumb = getBreadcrumb(pathname)
-  const initials = user.name
-    ? user.name
-        .split(' ')
-        .map((w) => w[0])
-        .join('')
-        .slice(0, 3)
-        .toUpperCase()
-    : 'HAL'
+  const active = getActive(pathname);
+  const breadcrumb = getBreadcrumb(pathname);
+  const initials =
+    user && user.name
+      ? user.name
+          .split(" ")
+          .map((w) => w[0])
+          .join("")
+          .slice(0, 3)
+          .toUpperCase()
+      : "HAL";
 
   return (
-    <div style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '260px 1fr' }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "grid",
+        gridTemplateColumns: "260px 1fr",
+      }}
+    >
       {/* Sidebar */}
       <aside
         style={{
-          position: 'sticky',
+          position: "sticky",
           top: 0,
-          height: '100vh',
-          borderRight: '1px solid var(--line)',
-          background: 'var(--bg-2)',
-          display: 'flex',
-          flexDirection: 'column',
-          padding: '28px 22px',
-          overflow: 'hidden',
+          height: "100vh",
+          borderRight: "1px solid var(--line)",
+          background: "var(--bg-2)",
+          display: "flex",
+          flexDirection: "column",
+          padding: "28px 22px",
+          overflow: "hidden",
         }}
       >
         <Link
           href="/"
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 12, marginBottom: 36 }}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 12,
+            marginBottom: 36,
+          }}
         >
           <svg width="34" height="34" viewBox="0 0 38 38" fill="none">
             <circle cx="19" cy="19" r="18.5" stroke="var(--line-2)" />
@@ -147,9 +157,18 @@ export default function AdminShell({ user, children }: Props) {
               strokeLinecap="round"
             />
           </svg>
-          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
-            <span style={{ fontWeight: 700, fontSize: 16, letterSpacing: '0.02em' }}>HAL</span>
-            <span className="mono" style={{ fontSize: 10, color: 'var(--fg-dim)', marginTop: 4 }}>
+          <div
+            style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}
+          >
+            <span
+              style={{ fontWeight: 700, fontSize: 16, letterSpacing: "0.02em" }}
+            >
+              HAL
+            </span>
+            <span
+              className="mono"
+              style={{ fontSize: 10, color: "var(--fg-dim)", marginTop: 4 }}
+            >
               ADMIN · v1.0
             </span>
           </div>
@@ -157,30 +176,37 @@ export default function AdminShell({ user, children }: Props) {
 
         <div
           className="mono"
-          style={{ fontSize: 10, color: 'var(--fg-dim)', marginBottom: 12, paddingLeft: 8 }}
+          style={{
+            fontSize: 10,
+            color: "var(--fg-dim)",
+            marginBottom: 12,
+            paddingLeft: 8,
+          }}
         >
           WORKSPACE
         </div>
 
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <nav style={{ display: "flex", flexDirection: "column", gap: 2 }}>
           {NAV_ITEMS.map((n) => {
-            const isActive = n.id === active
+            const isActive = n.id === active;
             return (
               <Link
                 key={n.id}
                 href={n.href}
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
+                  display: "flex",
+                  alignItems: "center",
                   gap: 12,
-                  padding: '10px 12px',
+                  padding: "10px 12px",
                   borderRadius: 10,
                   fontSize: 14,
                   fontWeight: 500,
-                  background: isActive ? 'var(--surface-2)' : 'transparent',
-                  color: isActive ? 'var(--fg)' : 'var(--fg-muted)',
-                  border: isActive ? '1px solid var(--line)' : '1px solid transparent',
-                  position: 'relative',
+                  background: isActive ? "var(--surface-2)" : "transparent",
+                  color: isActive ? "var(--fg)" : "var(--fg-muted)",
+                  border: isActive
+                    ? "1px solid var(--line)"
+                    : "1px solid transparent",
+                  position: "relative",
                 }}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24">
@@ -190,29 +216,33 @@ export default function AdminShell({ user, children }: Props) {
                 {isActive && (
                   <span
                     style={{
-                      position: 'absolute',
+                      position: "absolute",
                       right: 12,
                       width: 6,
                       height: 6,
-                      borderRadius: '50%',
-                      background: 'var(--accent)',
+                      borderRadius: "50%",
+                      background: "var(--accent)",
                     }}
                   />
                 )}
               </Link>
-            )
+            );
           })}
         </nav>
 
         <div
-          style={{ marginTop: 'auto', paddingTop: 20, borderTop: '1px solid var(--line)' }}
+          style={{
+            marginTop: "auto",
+            paddingTop: 20,
+            borderTop: "1px solid var(--line)",
+          }}
         >
           <div
             style={{
-              display: 'flex',
-              alignItems: 'center',
+              display: "flex",
+              alignItems: "center",
               gap: 12,
-              padding: '8px 4px',
+              padding: "8px 4px",
               marginBottom: 12,
             }}
           >
@@ -220,12 +250,13 @@ export default function AdminShell({ user, children }: Props) {
               style={{
                 width: 36,
                 height: 36,
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, var(--accent), var(--accent-2))',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--accent-ink)',
+                borderRadius: "50%",
+                background:
+                  "linear-gradient(135deg, var(--accent), var(--accent-2))",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "var(--accent-ink)",
                 fontWeight: 700,
                 fontSize: 12,
                 flexShrink: 0,
@@ -238,61 +269,61 @@ export default function AdminShell({ user, children }: Props) {
                 style={{
                   fontSize: 13,
                   fontWeight: 600,
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
                 }}
               >
-                {user.name || 'Admin'}
+                {user && user.name ? user.name : "Admin"}
               </div>
               <div
                 style={{
                   fontSize: 11,
-                  color: 'var(--fg-dim)',
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
+                  color: "var(--fg-dim)",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
                 }}
               >
-                {user.email || ''}
+                {user && user.email ? user.email : ""}
               </div>
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: 8 }}>
+          <div style={{ display: "flex", gap: 8 }}>
             <button
               onClick={toggleTheme}
-              title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+              title={theme === "dark" ? "Light mode" : "Dark mode"}
               style={{
                 flex: 1,
                 height: 36,
                 borderRadius: 8,
                 fontSize: 12,
                 fontWeight: 600,
-                background: 'var(--surface-2)',
-                border: '1px solid var(--line)',
-                color: 'var(--fg-muted)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                background: "var(--surface-2)",
+                border: "1px solid var(--line)",
+                color: "var(--fg-muted)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 gap: 6,
               }}
             >
-              {theme === 'dark' ? '☾  Dark' : '☀  Light'}
+              {theme === "dark" ? "☾  Dark" : "☀  Light"}
             </button>
             <button
-              onClick={() => signOut({ callbackUrl: '/' })}
+              onClick={() => signOut("/")}
               title="Sign out"
               style={{
                 width: 36,
                 height: 36,
                 borderRadius: 8,
-                background: 'var(--surface-2)',
-                border: '1px solid var(--line)',
-                color: 'var(--fg-muted)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                background: "var(--surface-2)",
+                border: "1px solid var(--line)",
+                color: "var(--fg-muted)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <svg
@@ -313,34 +344,46 @@ export default function AdminShell({ user, children }: Props) {
       </aside>
 
       {/* Main */}
-      <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <main
+        style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+      >
         {/* Topbar */}
         <header
           style={{
-            position: 'sticky',
+            position: "sticky",
             top: 0,
             zIndex: 10,
             height: 64,
-            padding: '0 36px',
-            borderBottom: '1px solid var(--line)',
-            background: 'var(--bg)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            padding: "0 36px",
+            borderBottom: "1px solid var(--line)",
+            background: "var(--bg)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }} className="mono">
+          <div
+            style={{ display: "flex", alignItems: "center", gap: 10 }}
+            className="mono"
+          >
             {breadcrumb.map((b, i) => (
               <span
                 key={i}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 10,
+                }}
               >
-                {i > 0 && <span style={{ color: 'var(--fg-dim)' }}>/</span>}
-                {'href' in b ? (
+                {i > 0 && <span style={{ color: "var(--fg-dim)" }}>/</span>}
+                {"href" in b ? (
                   <Link
                     href={b.href!}
                     style={{
-                      color: i === breadcrumb.length - 1 ? 'var(--fg)' : 'var(--fg-muted)',
+                      color:
+                        i === breadcrumb.length - 1
+                          ? "var(--fg)"
+                          : "var(--fg-muted)",
                       fontSize: 12,
                     }}
                   >
@@ -349,7 +392,10 @@ export default function AdminShell({ user, children }: Props) {
                 ) : (
                   <span
                     style={{
-                      color: i === breadcrumb.length - 1 ? 'var(--fg)' : 'var(--fg-muted)',
+                      color:
+                        i === breadcrumb.length - 1
+                          ? "var(--fg)"
+                          : "var(--fg-muted)",
                       fontSize: 12,
                     }}
                   >
@@ -363,9 +409,9 @@ export default function AdminShell({ user, children }: Props) {
             className="mono"
             style={{
               fontSize: 11,
-              color: 'var(--fg-dim)',
-              display: 'inline-flex',
-              alignItems: 'center',
+              color: "var(--fg-dim)",
+              display: "inline-flex",
+              alignItems: "center",
               gap: 8,
             }}
           >
@@ -373,9 +419,9 @@ export default function AdminShell({ user, children }: Props) {
               style={{
                 width: 6,
                 height: 6,
-                borderRadius: '50%',
-                background: '#7AFFB8',
-                boxShadow: '0 0 12px #7AFFB8',
+                borderRadius: "50%",
+                background: "#7AFFB8",
+                boxShadow: "0 0 12px #7AFFB8",
               }}
             />
             CONNECTED · MAIN
@@ -385,5 +431,5 @@ export default function AdminShell({ user, children }: Props) {
         {children}
       </main>
     </div>
-  )
+  );
 }
