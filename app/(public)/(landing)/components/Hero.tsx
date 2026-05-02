@@ -43,7 +43,7 @@ export default function Hero() {
         }}
       >
         <div className="mono" style={{ color: "var(--fg-muted)" }}>
-          PORTFOLIO · 2024 — 2026
+          PORTFOLIO · 2024 - 2026
         </div>
         <div
           className="mono"
@@ -88,7 +88,7 @@ export default function Hero() {
           <div className="reveal flex flex-col gap-10 mt-20">
             <p className="body" style={{ maxWidth: 460, marginTop: 0 }}>
               {D.identity.tagline} I work across the seam between design and
-              engineering — building tools, design systems, and the occasional
+              engineering - building tools, design systems, and the occasional
               shader.
             </p>
 
@@ -98,7 +98,7 @@ export default function Hero() {
                 className="mono"
                 style={{ color: "var(--fg-muted)", marginBottom: 12 }}
               >
-                — FOCUS
+                - FOCUS
               </div>
               <div
                 style={{

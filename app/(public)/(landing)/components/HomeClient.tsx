@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 
 const SECTIONS = [
-  { id: "top", label: "01 — Intro" },
-  { id: "domains", label: "02 — Domains" },
-  { id: "work", label: "03 — Work" },
-  { id: "about", label: "04 — About" },
-  { id: "contact", label: "05 — Contact" },
+  { id: "top", label: "01 - Intro" },
+  { id: "domains", label: "02 - Domains" },
+  { id: "work", label: "03 - Work" },
+  { id: "about", label: "04 - About" },
+  { id: "contact", label: "05 - Contact" },
 ];
 
 export default function HomeClient() {

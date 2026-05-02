@@ -27,7 +27,7 @@ export default function Projects() {
       >
         <div>
           <div className="eyebrow" style={{ marginBottom: 28 }}>
-            ◍ SELECTED WORK — 2023 → 2025
+            ◍ SELECTED WORK - 2023 → 2025
           </div>
           <h2 className="h-section" style={{ margin: 0 }}>
             Five projects.

@@ -329,7 +329,7 @@ function HelixArt({ animated: _animated }: { animated: boolean }) {
             fontFamily="ui-monospace, monospace"
             letterSpacing="1.5"
           >
-            — color tokens
+            - color tokens
           </text>
           {(
             [

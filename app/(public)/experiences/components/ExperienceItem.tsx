@@ -10,7 +10,7 @@ const PLACEHOLDER_SECTIONS = [
   },
   {
     heading: "Architecture",
-    body: "Built on Next.js with the App Router and React Server Components for the data-heavy pages. State machines for the editor surfaces, optimistic UI for everything else. The hot path was instrumented from day one — every interaction emits a span, and the slowest 1% of sessions get sampled for replay.",
+    body: "Built on Next.js with the App Router and React Server Components for the data-heavy pages. State machines for the editor surfaces, optimistic UI for everything else. The hot path was instrumented from day one - every interaction emits a span, and the slowest 1% of sessions get sampled for replay.",
   },
   {
     heading: "Trade-offs",
@@ -18,7 +18,7 @@ const PLACEHOLDER_SECTIONS = [
   },
   {
     heading: "What I'd change",
-    body: "I'd start with the boring parts first — auth, billing, observability — and let the marquee features bake longer. The version we shipped was the right product, but the second six weeks would have produced a much sharper version of the same idea.",
+    body: "I'd start with the boring parts first - auth, billing, observability - and let the marquee features bake longer. The version we shipped was the right product, but the second six weeks would have produced a much sharper version of the same idea.",
   },
 ];
 
@@ -222,7 +222,7 @@ export default function ExperienceItem({
                     fontSize: 11,
                   }}
                 >
-                  — 0{k + 1} · {s.heading.toUpperCase()}
+                  - 0{k + 1} · {s.heading.toUpperCase()}
                 </div>
                 <p
                   style={{

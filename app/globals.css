@@ -1,7 +1,7 @@
-/* Personal Portfolio — HAL */
+/* Personal Portfolio - HAL */
 @import "tailwindcss";
 
-/* Register design tokens — enables bg-bg, text-fg-muted, border-line, etc. */
+/* Register design tokens - enables bg-bg, text-fg-muted, border-line, etc. */
 @theme inline {
   --color-bg: var(--bg);
   --color-bg-2: var(--bg-2);
@@ -636,7 +636,7 @@ button {
   margin: 1.5rem 0;
 }
 
-/* Admin markdown preview — react-markdown rendered inside the editor split/preview pane */
+/* Admin markdown preview - react-markdown rendered inside the editor split/preview pane */
 .admin-preview {
   font-size: 14px;
   line-height: 1.75;
@@ -756,7 +756,7 @@ button {
 
 /* ─── Custom markdown editor ─────────────────────────────────────────────── */
 
-/* Shared metrics — pre and textarea MUST match exactly */
+/* Shared metrics - pre and textarea MUST match exactly */
 .editor-pre,
 .editor-textarea {
   padding: 22px 26px;
@@ -769,7 +769,7 @@ button {
   tab-size: 2;
 }
 
-/* Highlighted layer — sits under the transparent textarea */
+/* Highlighted layer - sits under the transparent textarea */
 .editor-pre {
   position: absolute;
   inset: 0;
@@ -781,7 +781,7 @@ button {
   border: none;
 }
 
-/* Input layer — text invisible so pre shows through */
+/* Input layer - text invisible so pre shows through */
 .editor-textarea {
   position: absolute;
   inset: 0;

@@ -27,7 +27,7 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Hoang Anh Luong — Front-end Developer",
+    default: "Hoang Anh Luong - Front-end Developer",
     template: "%s | HAL",
   },
   description:
@@ -48,13 +48,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: "Hoang Anh Luong",
-    title: "Hoang Anh Luong — Front-end Developer",
+    title: "Hoang Anh Luong - Front-end Developer",
     description:
       "Front-end developer building Next.js apps, design systems, and the web's quieter corners.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hoang Anh Luong — Front-end Developer",
+    title: "Hoang Anh Luong - Front-end Developer",
     description:
       "Front-end developer building Next.js apps, design systems, and the web's quieter corners.",
     creator: "@hal_dev",
@@ -77,7 +77,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* No-FOUC theme bootstrap — reads localStorage before first paint */}
+        {/* No-FOUC theme bootstrap - reads localStorage before first paint */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){var t='dark';try{t=localStorage.getItem('hal-theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');}catch(e){}document.documentElement.setAttribute('data-theme',t);var a=function(){if(document.body)document.body.setAttribute('data-theme',t);};a();if(!document.body)document.addEventListener('DOMContentLoaded',a);})();`,

@@ -35,7 +35,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
       <section className="shell pb-[100px]">
         <div className="reveal flex justify-between items-center pb-7 border-b border-line mb-10 flex-wrap gap-4">
           <div className="mono text-fg-muted">
-            ◍ ALL POSTS — {filtered.length}
+            ◍ ALL POSTS - {filtered.length}
           </div>
           <div className="flex gap-2 flex-wrap">
             {categories.map((c) => (

@@ -45,7 +45,7 @@ export default function ExperienceHero() {
 
       <div className="reveal">
         <div className="eyebrow" style={{ marginBottom: 28 }}>
-          ◍ EXPERIENCES — DETAILED
+          ◍ EXPERIENCES - DETAILED
         </div>
         <h1 className="h-display" style={{ margin: 0, fontWeight: 500 }}>
           Every project,

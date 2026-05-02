@@ -2,7 +2,7 @@ function esc(s: string): string {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-// Inline tokenizer — walks the string char by char to avoid greedy regex conflicts
+// Inline tokenizer - walks the string char by char to avoid greedy regex conflicts
 function inlineHL(raw: string): string {
   let out = "";
   let i = 0;
@@ -66,7 +66,7 @@ function inlineHL(raw: string): string {
 
 function tokenizeLine(line: string): string {
   // Setext headings (====  / ----)
-  // (handled as plain text — too complex without lookahead)
+  // (handled as plain text - too complex without lookahead)
 
   // ATX headings
   const hm = line.match(/^(#{1,6})( .*)/);

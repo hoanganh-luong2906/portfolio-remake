@@ -64,7 +64,7 @@ export default function Contact() {
               className="mono"
               style={{ marginTop: 24, color: "var(--fg-muted)" }}
             >
-              © 2026 — H.A.L.
+              © 2026 - H.A.L.
             </div>
           </div>
 

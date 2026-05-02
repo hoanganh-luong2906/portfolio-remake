@@ -90,13 +90,13 @@ export default async function LoginPage({
         </div>
 
         <div className="glass w-full max-w-110 p-10 rounded-[20px]">
-          <div className="mono text-[11px] text-fg-muted mb-4.5">— SIGN IN</div>
+          <div className="mono text-[11px] text-fg-muted mb-4.5">- SIGN IN</div>
           <h2 className="m-0 text-[32px] font-medium tracking-[-0.02em] leading-[1.1]">
             Welcome back<span className="text-accent">.</span>
           </h2>
           <p className="text-sm text-fg-muted mt-3 leading-relaxed">
             Continue with Google to manage posts. Any account that signs in gets
-            full access — no role system yet.
+            full access - no role system yet.
           </p>
 
           {error && (
@@ -112,7 +112,7 @@ export default async function LoginPage({
                 <div className="font-semibold">Sign-in failed</div>
                 <div className="text-fg-muted mt-0.5 text-xs">
                   {error === "AccessDenied"
-                    ? "Access denied — that account isn't on the allow-list."
+                    ? "Access denied - Account does not exist."
                     : `Auth error: ${error}`}
                 </div>
               </div>

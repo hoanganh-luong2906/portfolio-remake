@@ -20,13 +20,13 @@ export default function BlogHero() {
           ◍ WRITING · {D.blog.length} POSTS
         </div>
         <div className="mono" style={{ color: "var(--fg-muted)" }}>
-          UPDATED — APR 2026
+          UPDATED - APR 2026
         </div>
       </div>
 
       <div className="reveal">
         <div className="eyebrow" style={{ marginBottom: 28 }}>
-          ◍ BLOG — NOTES & ESSAYS
+          ◍ BLOG - NOTES & ESSAYS
         </div>
         <h1
           className="h-display"

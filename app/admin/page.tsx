@@ -51,20 +51,20 @@ export default function AdminPage() {
         }}
       >
         <StatCard
-          label="— PUBLISHED"
+          label="- PUBLISHED"
           value={published}
           delta="↑ live now"
           hint="Posts visible at /blog right now."
           accent
         />
         <StatCard
-          label="— DRAFTS"
+          label="- DRAFTS"
           value={drafts}
-          delta={drafts > 0 ? "in progress" : "—"}
+          delta={drafts > 0 ? "in progress" : "-"}
           hint="Saved but not yet live. Resume from the editor."
         />
         <StatCard
-          label="— TOTAL"
+          label="- TOTAL"
           value={allPosts.length}
           delta="all-time"
           hint="Everything written, including unpublished work."
@@ -89,7 +89,7 @@ export default function AdminPage() {
               className="mono"
               style={{ fontSize: 11, color: "var(--fg-muted)" }}
             >
-              — RECENT ACTIVITY
+              - RECENT ACTIVITY
             </div>
             <Link
               href="/admin/posts"
@@ -202,7 +202,7 @@ export default function AdminPage() {
               className="mono"
               style={{ fontSize: 11, color: "var(--fg-muted)" }}
             >
-              — NEW POST
+              - NEW POST
             </div>
             <div
               style={{
@@ -268,7 +268,7 @@ export default function AdminPage() {
               className="mono"
               style={{ fontSize: 11, color: "var(--fg-muted)" }}
             >
-              — MANAGE
+              - MANAGE
             </div>
             <div
               style={{

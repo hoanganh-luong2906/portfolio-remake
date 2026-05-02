@@ -26,7 +26,7 @@ No test framework is configured.
 ```
 app/
   layout.tsx              # Root: fonts, no-FOUC theme script, global CSS
-  (landing)/              # Route group — homepage
+  (landing)/              # Route group - homepage
     layout.tsx            # Wraps children in <PortfolioChrome>
     page.tsx
     components/           # All landing-page sections
@@ -49,9 +49,9 @@ All portfolio content (nav, projects, blog posts, experiences, testimonials, FAQ
 
 | Component               | Role                                                                                    |
 | ----------------------- | --------------------------------------------------------------------------------------- |
-| `PortfolioChrome`       | Wraps every route — adds grain overlay, bg layer, and `RevealObserver`                  |
-| `RevealObserver`        | Client component — wires IntersectionObserver to `.reveal` class → adds `.in` on scroll |
-| `ThemeToggle`           | Client component — dark/light toggle, persists to `localStorage` key `hal-theme`        |
+| `PortfolioChrome`       | Wraps every route - adds grain overlay, bg layer, and `RevealObserver`                  |
+| `RevealObserver`        | Client component - wires IntersectionObserver to `.reveal` class → adds `.in` on scroll |
+| `ThemeToggle`           | Client component - dark/light toggle, persists to `localStorage` key `hal-theme`        |
 | `project-art/index.tsx` | SVG illustrations for each project, switched by `ArtKind`                               |
 
 ### State colocation (Kent C. Dodds convention)
@@ -60,8 +60,8 @@ State lives as close to where it's used as possible. This is the guiding rule fo
 
 - **Server Components by default.** Only add `"use client"` when the component needs hooks or browser APIs.
 - **Lift state only when two siblings genuinely share it.** If only one component needs a piece of state, it owns it.
-- **No prop-drilling through server trees.** If a client component deep in the tree needs state, co-locate the state there — don't hoist it to a server parent just to pass it down.
-- **`HomeClient` and `Nav` each track active section independently** via their own `IntersectionObserver` — this is intentional, not a bug. Extracting shared state here would force both into a common client boundary for no real gain.
+- **No prop-drilling through server trees.** If a client component deep in the tree needs state, co-locate the state there - don't hoist it to a server parent just to pass it down.
+- **`HomeClient` and `Nav` each track active section independently** via their own `IntersectionObserver` - this is intentional, not a bug. Extracting shared state here would force both into a common client boundary for no real gain.
 
 Practical checklist when adding a component:
 
@@ -79,7 +79,7 @@ Add `className="reveal"` to any element to opt into scroll-reveal. `RevealObserv
 
 ### CSS approach
 
-Tailwind v4 utility classes + hand-written CSS variables. Design tokens are CSS variables, not Tailwind config. Do not duplicate token values — always reference `var(--token-name)`.
+Tailwind v4 utility classes + hand-written CSS variables. Design tokens are CSS variables, not Tailwind config. Do not duplicate token values - always reference `var(--token-name)`.
 
 ### Linting / formatting
 

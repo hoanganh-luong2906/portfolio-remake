@@ -29,7 +29,7 @@ export default function Domains() {
       >
         <div>
           <div className="eyebrow" style={{ marginBottom: 28 }}>
-            ◍ TECHNICAL DOMAINS — 06
+            ◍ TECHNICAL DOMAINS - 06
           </div>
           <h2 className="h-section" style={{ margin: 0 }}>
             The disciplines
@@ -38,8 +38,8 @@ export default function Domains() {
         </div>
         <p className="body" style={{ maxWidth: 480 }}>
           I&rsquo;m a generalist by curiosity, a specialist by focus. The list
-          below is what I&rsquo;ve actually shipped — production, in front of
-          users — not just dabbled with on a weekend.
+          below is what I&rsquo;ve actually shipped - production, in front of
+          users - not just dabbled with on a weekend.
         </p>
       </div>
 

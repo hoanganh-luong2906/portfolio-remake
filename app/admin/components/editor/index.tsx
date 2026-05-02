@@ -225,7 +225,7 @@ function EditPane({
       const ta = e.currentTarget;
       const { selectionStart: ss, selectionEnd: se } = ta;
 
-      // Tab / Shift+Tab — insert or remove 2-space indent
+      // Tab / Shift+Tab - insert or remove 2-space indent
       if (e.key === "Tab") {
         e.preventDefault();
         if (e.shiftKey) {
@@ -247,7 +247,7 @@ function EditPane({
         return;
       }
 
-      // Smart Enter — continue list items
+      // Smart Enter - continue list items
       if (e.key === "Enter" && !e.shiftKey) {
         const result = smartEnter(value, ss);
         if (result) {
@@ -291,7 +291,7 @@ function EditPane({
         overflow: "hidden",
       }}
     >
-      {/* Syntax highlight layer — sits under the transparent textarea */}
+      {/* Syntax highlight layer - sits under the transparent textarea */}
       <pre
         ref={preRef}
         aria-hidden
@@ -299,7 +299,7 @@ function EditPane({
         dangerouslySetInnerHTML={{ __html: highlight(value) }}
       />
 
-      {/* Input layer — transparent text so the pre shows through */}
+      {/* Input layer - transparent text so the pre shows through */}
       <textarea
         ref={taRef as React.RefObject<HTMLTextAreaElement>}
         className="editor-textarea"

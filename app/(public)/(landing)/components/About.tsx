@@ -11,7 +11,7 @@ export default function About() {
     >
       <div className="reveal" style={{ marginBottom: 72 }}>
         <div className="eyebrow" style={{ marginBottom: 28 }}>
-          ◍ ABOUT — A SHORT BIO
+          ◍ ABOUT - A SHORT BIO
         </div>
         <h2 className="h-section" style={{ margin: 0, maxWidth: 1100 }}>
           Trained as a designer, hooked on engineering.
@@ -66,7 +66,7 @@ export default function About() {
             className="mono"
             style={{ color: "var(--fg-muted)", marginBottom: 24 }}
           >
-            — EXPERIENCE
+            - EXPERIENCE
           </div>
           <ul
             style={{

@@ -8,7 +8,7 @@ export const PORTFOLIO_DATA = {
     yearsExp: "+3 YoE",
     available: true,
     tagline:
-      "I build Next.js apps that move with intent — fast, accessible, and full of considered detail. App Router, Server Components, and the rest of the modern React stack are my default base.",
+      "I build Next.js apps that move with intent - fast, accessible, and full of considered detail. App Router, Server Components, and the rest of the modern React stack are my default base.",
   },
   nav: [
     { id: "home", label: "Home", href: "/" },
@@ -31,7 +31,7 @@ export const PORTFOLIO_DATA = {
       id: "01",
       title: "Next.js Engineering",
       blurb:
-        "My default base — Next.js with the App Router, Server Components, and a typed data layer. Architectures that scale from a marketing site to a logged-in product, tuned for Core Web Vitals.",
+        "My default base - Next.js with the App Router, Server Components, and a typed data layer. Architectures that scale from a marketing site to a logged-in product, tuned for Core Web Vitals.",
       stack: ["Next.js 15", "React 19", "TypeScript", "tRPC", "Vercel"],
       meta: "Base stack",
     },
@@ -63,7 +63,7 @@ export const PORTFOLIO_DATA = {
       id: "05",
       title: "Developer Tools",
       blurb:
-        "CLIs, devtools panels, internal IDE plugins. The kind of tools that make the rest of engineering 10% faster — every day.",
+        "CLIs, devtools panels, internal IDE plugins. The kind of tools that make the rest of engineering 10% faster - every day.",
       stack: ["Node", "ESBuild", "Bun", "VS Code API"],
       meta: "Internal",
     },
@@ -110,7 +110,7 @@ export const PORTFOLIO_DATA = {
     {
       id: "03",
       year: "2024",
-      name: "Atlas — Map IDE",
+      name: "Atlas - Map IDE",
       role: "Founding Engineer",
       blurb:
         "An IDE for cartographers. Real-time collaborative editing on vector tiles, with a plugin system written by mapmakers who have never touched JavaScript.",
@@ -140,7 +140,7 @@ export const PORTFOLIO_DATA = {
     {
       id: "05",
       year: "2023",
-      name: "Pulse — Status Page",
+      name: "Pulse - Status Page",
       role: "Solo",
       blurb:
         "Tiny, fast, opinionated status page. Single binary, SQLite, no JS frameworks, ships in a 90KB bundle. Powers a few thousand small teams.",
@@ -181,25 +181,25 @@ export const PORTFOLIO_DATA = {
   ],
   experiences: [
     {
-      year: "2024 — Now",
+      year: "2024 - Now",
       role: "Lead Front-end Engineer",
       company: "Loom",
       note: "Editor & rendering",
     },
     {
-      year: "2023 — 2024",
+      year: "2023 - 2024",
       role: "Design Engineer",
       company: "Helix",
       note: "Design system",
     },
     {
-      year: "2022 — 2023",
+      year: "2022 - 2023",
       role: "Founding Engineer",
       company: "Atlas (acq.)",
       note: "IDE & infra",
     },
     {
-      year: "2021 — 2022",
+      year: "2021 - 2022",
       role: "Freelance",
       company: "Self",
       note: "Studios & startups",
@@ -208,7 +208,7 @@ export const PORTFOLIO_DATA = {
   faqs: [
     {
       q: "What's your engagement model?",
-      a: "I'm full-time at Loom. I take on one outside project per quarter — usually 2–6 weeks, scoped tight. If yours is a fit, the worst-case is a kind no within 48 hours.",
+      a: "I'm full-time at Loom. I take on one outside project per quarter - usually 2–6 weeks, scoped tight. If yours is a fit, the worst-case is a kind no within 48 hours.",
     },
     {
       q: "Do you work with design partners or solo?",
@@ -220,7 +220,7 @@ export const PORTFOLIO_DATA = {
     },
     {
       q: "Can I see code samples?",
-      a: "Yes — for hiring conversations I share a private repo with three real PRs and a short Loom of me reasoning through one of them. Email me and I'll send the link.",
+      a: "Yes - for hiring conversations I share a private repo with three real PRs and a short Loom of me reasoning through one of them. Email me and I'll send the link.",
     },
   ],
   blog: [
@@ -228,7 +228,7 @@ export const PORTFOLIO_DATA = {
       slug: "rendering-modes-in-nextjs",
       title: "A field guide to rendering modes in Next.js",
       excerpt:
-        "Static, dynamic, streaming, and PPR — when each one earns its keep, and the trade-offs nobody mentions in the docs.",
+        "Static, dynamic, streaming, and PPR - when each one earns its keep, and the trade-offs nobody mentions in the docs.",
       date: "Apr 12, 2026",
       readTime: "9 min",
       category: "Engineering",
@@ -239,7 +239,7 @@ export const PORTFOLIO_DATA = {
       slug: "design-tokens-as-an-api",
       title: "Treating design tokens like a public API",
       excerpt:
-        "Tokens are not a stylesheet. They're a contract between design and engineering — and the moment you treat them as anything less, the system rots.",
+        "Tokens are not a stylesheet. They're a contract between design and engineering - and the moment you treat them as anything less, the system rots.",
       date: "Mar 28, 2026",
       readTime: "7 min",
       category: "Design Systems",

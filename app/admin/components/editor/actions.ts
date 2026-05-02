@@ -138,7 +138,7 @@ export function applyFormat(
   }
 }
 
-// Smart Enter — continues list items; called from onKeyDown
+// Smart Enter - continues list items; called from onKeyDown
 export function smartEnter(value: string, ss: number): Result | null {
   const lStart = lineStart(value, ss);
   const currentLine = value.slice(lStart, ss);
@@ -147,7 +147,7 @@ export function smartEnter(value: string, ss: number): Result | null {
   const olm = currentLine.match(/^(\s*)(\d+)\. /);
   if (olm) {
     if (currentLine.trim() === `${olm[2]}.`) {
-      // Empty item — exit list
+      // Empty item - exit list
       const newValue = `${value.slice(0, lStart)}\n${value.slice(ss)}`;
       return { value: newValue, selStart: lStart + 1, selEnd: lStart + 1 };
     }
@@ -164,7 +164,7 @@ export function smartEnter(value: string, ss: number): Result | null {
   const ulm = currentLine.match(/^(\s*)([-*+]) /);
   if (ulm) {
     if (currentLine.trim() === ulm[2]) {
-      // Empty item — exit list
+      // Empty item - exit list
       const newValue = `${value.slice(0, lStart)}\n${value.slice(ss)}`;
       return { value: newValue, selStart: lStart + 1, selEnd: lStart + 1 };
     }

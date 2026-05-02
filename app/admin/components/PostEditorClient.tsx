@@ -48,7 +48,7 @@ function Field({
         className="mono"
         style={{ fontSize: 10, color: "var(--fg-dim)", marginBottom: 8 }}
       >
-        — {label}
+        - {label}
       </div>
       {children}
     </div>
