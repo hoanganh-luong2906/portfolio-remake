@@ -127,7 +127,7 @@ export default async function LoginPage({
           >
             <button
               type="submit"
-              className="mt-7 w-full h-13 rounded-xl text-sm font-bold bg-fg text-bg border border-fg inline-flex items-center justify-center gap-3 cursor-pointer"
+              className="mt-7 w-full h-13 rounded-xl text-sm font-bold! bg-fg! text-bg! border border-fg inline-flex items-center justify-center gap-3 cursor-pointer"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden>
                 <path
