@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import { Badge, Button, Card, IconButton, Text } from "@/src/components/ui";
 import ProjectArt from "../../../../src/components/project-art";
 import { PORTFOLIO_DATA } from "../../../../src/lib/data";
 
@@ -26,33 +26,33 @@ export default function Projects() {
         }}
       >
         <div>
-          <div className="eyebrow" style={{ marginBottom: 28 }}>
+          <Text variant="eyebrow" style={{ marginBottom: 28 }}>
             ◍ SELECTED WORK - 2023 → 2025
-          </div>
-          <h2 className="h-section" style={{ margin: 0 }}>
+          </Text>
+          <Text variant="h-section" style={{ margin: 0 }}>
             Five projects.
             <br />
             One{" "}
             <span style={{ fontStyle: "italic", color: "var(--accent)" }}>
               through-line.
             </span>
-          </h2>
+          </Text>
         </div>
-        <p className="body" style={{ maxWidth: 480 }}>
+        <Text variant="body" style={{ maxWidth: 480 }}>
           Each one of these started as someone saying &ldquo;I don&rsquo;t think
           this is possible in the browser.&rdquo; They were wrong, mostly. A few
           are open-source; a few are quietly running inside larger products
           you&rsquo;ve used.
-        </p>
+        </Text>
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
         {D.projects.map((p, i) => {
           const reverse = i % 2 === 1;
           return (
-            <article
+            <Card
               key={p.id}
-              className="glass project-card reveal"
+              className="project-card reveal"
               onMouseEnter={() => setHovered(p.id)}
               onMouseLeave={() => setHovered(null)}
               style={{
@@ -84,26 +84,8 @@ export default function Projects() {
                     gap: 6,
                   }}
                 >
-                  <span
-                    className="chip"
-                    style={{
-                      background: "rgba(0,0,0,0.55)",
-                      borderColor: "rgba(255,255,255,0.18)",
-                      color: "#fff",
-                    }}
-                  >
-                    {p.year}
-                  </span>
-                  <span
-                    className="chip"
-                    style={{
-                      background: "rgba(0,0,0,0.55)",
-                      borderColor: "rgba(255,255,255,0.18)",
-                      color: "#fff",
-                    }}
-                  >
-                    {p.role}
-                  </span>
+                  <Badge variant="glass">{p.year}</Badge>
+                  <Badge variant="glass">{p.role}</Badge>
                 </div>
               </div>
 
@@ -125,12 +107,9 @@ export default function Projects() {
                   }}
                 >
                   <div>
-                    <div
-                      className="mono"
-                      style={{ color: "var(--fg-muted)", marginBottom: 16 }}
-                    >
+                    <Text variant="mono" muted style={{ marginBottom: 16 }}>
                       PROJECT /{p.id}
-                    </div>
+                    </Text>
                     <h3
                       style={{
                         margin: 0,
@@ -143,19 +122,10 @@ export default function Projects() {
                       {p.name}
                     </h3>
                   </div>
-                  <button
+                  <IconButton
+                    size="lg"
                     className="arrow"
                     aria-label="Open case study"
-                    style={{
-                      width: 56,
-                      height: 56,
-                      borderRadius: "50%",
-                      border: "1px solid var(--line)",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                       <path
@@ -166,15 +136,15 @@ export default function Projects() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                  </button>
+                  </IconButton>
                 </div>
 
-                <p
-                  className="body"
+                <Text
+                  variant="body"
                   style={{ marginTop: 20, marginBottom: 24, maxWidth: 520 }}
                 >
                   {p.blurb}
-                </p>
+                </Text>
 
                 <div
                   style={{
@@ -185,13 +155,13 @@ export default function Projects() {
                   }}
                 >
                   {p.stack.map((s) => (
-                    <span
+                    <Badge
                       key={s}
-                      className="chip"
+                      size="sm"
                       style={{ height: 26, fontSize: 11 }}
                     >
                       {s}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
 
@@ -229,7 +199,7 @@ export default function Projects() {
                   ))}
                 </div>
               </div>
-            </article>
+            </Card>
           );
         })}
       </div>
@@ -250,9 +220,9 @@ export default function Projects() {
           textAlign: "center",
         }}
       >
-        <div className="mono" style={{ color: "var(--fg-muted)" }}>
+        <Text variant="mono" muted>
           ◍ THE FULL ARCHIVE
-        </div>
+        </Text>
         <h3
           style={{
             margin: 0,
@@ -269,27 +239,31 @@ export default function Projects() {
             Every project, every detail.
           </span>
         </h3>
-        <p className="body" style={{ maxWidth: 480, margin: 0 }}>
+        <Text variant="body" style={{ maxWidth: 480, margin: 0 }}>
           The page above is the highlight reel. The full archive includes
           process notes, architecture diagrams, and the trade-offs behind every
           decision.
-        </p>
-        <Link
+        </Text>
+        <Button
           href="/experiences"
-          className="btn btn-primary"
-          style={{ height: 56, padding: "0 28px", fontSize: 15, marginTop: 8 }}
+          variant="primary"
+          size="lg"
+          style={{ padding: "0 28px", fontSize: 15, marginTop: 8 }}
+          iconPosition="right"
+          icon={
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          }
         >
           See all experiences
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M5 12h14M13 6l6 6-6 6"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </Link>
+        </Button>
       </div>
     </section>
   );

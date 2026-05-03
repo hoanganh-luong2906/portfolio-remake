@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Card, Text } from "@/src/components/ui";
 import { PORTFOLIO_DATA } from "../../../../src/lib/data";
 
 export default function Hero() {
@@ -42,13 +43,10 @@ export default function Hero() {
           marginBottom: 60,
         }}
       >
-        <div className="mono" style={{ color: "var(--fg-muted)" }}>
+        <Text variant="mono" muted>
           PORTFOLIO · 2024 - 2026
-        </div>
-        <div
-          className="mono"
-          style={{ color: "var(--fg-muted)", display: "flex", gap: 24 }}
-        >
+        </Text>
+        <Text variant="mono" muted style={{ display: "flex", gap: 24 }}>
           <span>HCM · {time}</span>
           <span
             style={{
@@ -69,37 +67,38 @@ export default function Hero() {
             />
             AVAILABLE
           </span>
-        </div>
+        </Text>
       </div>
 
       {/* Display name */}
       <div className="w-full flex justify-between">
         <div className="w-fit flex flex-col justify-between">
           <div className="reveal">
-            <div className="eyebrow" style={{ marginBottom: 28 }}>
+            <Text variant="eyebrow" style={{ marginBottom: 28 }}>
               ◍ Front-end Developer · Design Engineer
-            </div>
-            <h1 className="h-display" style={{ margin: 0, fontWeight: 500 }}>
+            </Text>
+            <Text
+              variant="h-display"
+              as="h1"
+              style={{ margin: 0, fontWeight: 500 }}
+            >
               <span style={{ display: "block" }}>Hoang Anh</span>
               <span style={{ color: "var(--accent)" }}>Luong.</span>
-            </h1>
+            </Text>
           </div>
 
           <div className="reveal flex flex-col gap-10 mt-20">
-            <p className="body" style={{ maxWidth: 460, marginTop: 0 }}>
+            <Text variant="body" style={{ maxWidth: 460, marginTop: 0 }}>
               {D.identity.tagline} I work across the seam between design and
               engineering - building tools, design systems, and the occasional
               shader.
-            </p>
+            </Text>
 
             {/* Stats card */}
-            <div className="glass" style={{ padding: 28 }}>
-              <div
-                className="mono"
-                style={{ color: "var(--fg-muted)", marginBottom: 12 }}
-              >
+            <Card style={{ padding: 28 }}>
+              <Text variant="mono" muted style={{ marginBottom: 12 }}>
                 - FOCUS
-              </div>
+              </Text>
               <div
                 style={{
                   fontSize: 22,
@@ -123,7 +122,7 @@ export default function Hero() {
                 Three or four problems a year, gone deep. The shape of the work
                 matters more than the headcount.
               </p>
-            </div>
+            </Card>
           </div>
         </div>
 

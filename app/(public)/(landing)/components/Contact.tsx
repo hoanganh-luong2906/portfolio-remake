@@ -1,3 +1,4 @@
+import { Text } from "@/src/components/ui";
 import { PORTFOLIO_DATA } from "../../../../src/lib/data";
 import Logo from "./Logo";
 
@@ -14,9 +15,9 @@ export default function Contact() {
         className="reveal"
         style={{ borderTop: "1px solid var(--line)", paddingTop: 80 }}
       >
-        <div className="eyebrow" style={{ marginBottom: 28 }}>
+        <Text variant="eyebrow" style={{ marginBottom: 28 }}>
           ◍ CONTACT
-        </div>
+        </Text>
         <h2
           style={{
             margin: 0,
@@ -53,13 +54,13 @@ export default function Contact() {
         >
           <div>
             <Logo />
-            <p
-              className="body"
+            <Text
+              variant="body"
               style={{ marginTop: 20, maxWidth: 320, fontSize: 14 }}
             >
               Independent front-end developer building tools, systems, and the
               web&rsquo;s quieter corners. Available for select work.
-            </p>
+            </Text>
             <div
               className="mono"
               style={{ marginTop: 24, color: "var(--fg-muted)" }}
@@ -69,12 +70,9 @@ export default function Contact() {
           </div>
 
           <div>
-            <div
-              className="mono"
-              style={{ color: "var(--fg-muted)", marginBottom: 18 }}
-            >
+            <Text variant="mono" muted style={{ marginBottom: 18 }}>
               Reach out
-            </div>
+            </Text>
             <a
               href={`mailto:${D.identity.email}`}
               style={{ display: "block", fontSize: 17, marginBottom: 8 }}
@@ -102,12 +100,9 @@ export default function Contact() {
           </div>
 
           <div>
-            <div
-              className="mono"
-              style={{ color: "var(--fg-muted)", marginBottom: 18 }}
-            >
+            <Text variant="mono" muted style={{ marginBottom: 18 }}>
               Elsewhere
-            </div>
+            </Text>
             {(
               [
                 ["GitHub", "@hal"],
@@ -134,12 +129,9 @@ export default function Contact() {
           </div>
 
           <div>
-            <div
-              className="mono"
-              style={{ color: "var(--fg-muted)", marginBottom: 18 }}
-            >
+            <Text variant="mono" muted style={{ marginBottom: 18 }}>
               This site
-            </div>
+            </Text>
             <ul
               style={{
                 listStyle: "none",

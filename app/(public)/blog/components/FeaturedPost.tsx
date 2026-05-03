@@ -1,5 +1,6 @@
 import type { Post } from "../../../../src/lib/db/schema";
 import Link from "next/link";
+import { Badge } from "@/src/components/ui";
 import ProjectArt from "../../../../src/components/project-art";
 import { formatDate, readTime } from "../../../../src/lib/utils";
 
@@ -17,17 +18,8 @@ export default function FeaturedPost({ post }: { post: Post }) {
             animated={false}
           />
           <div className="absolute left-5 top-5 flex gap-1.5">
-            <span className="chip chip-accent">FEATURED</span>
-            <span
-              className="chip"
-              style={{
-                background: "rgba(0,0,0,0.55)",
-                color: "#fff",
-                borderColor: "rgba(255,255,255,0.18)",
-              }}
-            >
-              {post.category}
-            </span>
+            <Badge variant="accent">FEATURED</Badge>
+            <Badge variant="glass">{post.category}</Badge>
           </div>
         </div>
 
@@ -41,13 +33,9 @@ export default function FeaturedPost({ post }: { post: Post }) {
           <p className="body mt-5 mb-7 text-base">{post.excerpt}</p>
           <div className="flex flex-wrap gap-1.5">
             {post.tags.map((t) => (
-              <span
-                key={t}
-                className="chip"
-                style={{ height: 26, fontSize: 11 }}
-              >
+              <Badge key={t} size="sm" style={{ height: 26, fontSize: 11 }}>
                 #{t}
-              </span>
+              </Badge>
             ))}
           </div>
           <div className="mt-8 inline-flex items-center gap-2.5 text-accent font-semibold text-sm">

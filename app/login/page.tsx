@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth, signIn } from "@/auth";
 import ThemeToggle from "@/src/components/ThemeToggle";
+import { Alert, Card, Text } from "@/src/components/ui";
 
 export const metadata = { title: "Sign In" };
 
@@ -33,7 +34,9 @@ export default async function LoginPage({
         </Link>
 
         <div>
-          <div className="eyebrow mb-5.5">◍ ADMIN AREA · INTERNAL</div>
+          <Text variant="eyebrow" className="mb-5.5">
+            ◍ ADMIN AREA · INTERNAL
+          </Text>
           <h1
             className="h-display m-0"
             style={{ fontSize: "clamp(56px, 6vw, 96px)" }}
@@ -47,10 +50,10 @@ export default async function LoginPage({
               <span className="text-accent">.</span>
             </span>
           </h1>
-          <p className="body max-w-115 mt-7">
+          <Text variant="body" className="max-w-115 mt-7">
             URL-only access. No public link from the site. Sign in with the
             Google account on file, write something honest, hit publish.
-          </p>
+          </Text>
         </div>
 
         <div className="mono text-[11px] text-fg-dim flex justify-between">
@@ -89,8 +92,10 @@ export default async function LoginPage({
           <ThemeToggle />
         </div>
 
-        <div className="glass w-full max-w-110 p-10 rounded-[20px]">
-          <div className="mono text-[11px] text-fg-muted mb-4.5">- SIGN IN</div>
+        <Card className="w-full max-w-110 p-10 rounded-[20px]">
+          <Text variant="mono" muted style={{ fontSize: 11, marginBottom: 18 }}>
+            - SIGN IN
+          </Text>
           <h2 className="m-0 text-[32px] font-medium tracking-[-0.02em] leading-[1.1]">
             Welcome back<span className="text-accent">.</span>
           </h2>
@@ -100,23 +105,11 @@ export default async function LoginPage({
           </p>
 
           {error && (
-            <div
-              className="mt-5.5 py-3 px-3.5 rounded-[10px] text-[13px] text-fg flex gap-2.5 items-start border"
-              style={{
-                background: "color-mix(in oklab, #ff4d4d 14%, transparent)",
-                borderColor: "color-mix(in oklab, #ff4d4d 40%, transparent)",
-              }}
-            >
-              <span className="text-sm">⚠</span>
-              <div>
-                <div className="font-semibold">Sign-in failed</div>
-                <div className="text-fg-muted mt-0.5 text-xs">
-                  {error === "AccessDenied"
-                    ? "Access denied - Account does not exist."
-                    : `Auth error: ${error}`}
-                </div>
-              </div>
-            </div>
+            <Alert variant="error" title="Sign-in failed" className="mt-5.5">
+              {error === "AccessDenied"
+                ? "Access denied - Account does not exist."
+                : `Auth error: ${error}`}
+            </Alert>
           )}
 
           <form
@@ -161,7 +154,7 @@ export default async function LoginPage({
             </Link>
             <span className="text-fg-dim">v1.0</span>
           </div>
-        </div>
+        </Card>
       </div>
     </div>
   );

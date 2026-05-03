@@ -12,11 +12,11 @@ function slugify(title: string) {
     .replace(/(^-|-$)/g, "");
 }
 
-function estimateReadTime(body: string) {
-  const words = body.trim().split(/\s+/).length;
-  const minutes = Math.max(1, Math.round(words / 200));
-  return `${minutes} min read`;
-}
+// function estimateReadTime(body: string) {
+//   const words = body.trim().split(/\s+/).length;
+//   const minutes = Math.max(1, Math.round(words / 200));
+//   return `${minutes} min read`;
+// }
 
 export async function createPostAction(formData: FormData) {
   await verifySession();

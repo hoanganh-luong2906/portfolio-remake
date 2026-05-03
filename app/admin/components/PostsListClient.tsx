@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useDeletePost, usePosts, useUpdatePost } from "@/app/hooks/usePost";
+import { Card, Input, Text } from "@/src/components/ui";
 
 export default function PostsListClient() {
   const { data: posts = [], isLoading } = usePosts();
@@ -58,15 +59,9 @@ export default function PostsListClient() {
 
   if (isLoading) {
     return (
-      <div
-        style={{
-          padding: "60px 0",
-          textAlign: "center",
-          color: "var(--fg-muted)",
-        }}
-      >
+      <Text muted style={{ padding: "60px 0", textAlign: "center" }}>
         Loading posts…
-      </div>
+      </Text>
     );
   }
 
@@ -75,8 +70,8 @@ export default function PostsListClient() {
   return (
     <div style={{ opacity: isMutating ? 0.7 : 1, transition: "opacity 0.2s" }}>
       {/* Filter & search */}
-      <div
-        className="glass"
+      <Card
+        variant="sm"
         style={{
           padding: 12,
           borderRadius: 14,
@@ -124,49 +119,29 @@ export default function PostsListClient() {
             </button>
           ))}
         </div>
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            padding: "0 14px",
-            height: 40,
-            background: "var(--surface)",
-            border: "1px solid var(--line)",
-            borderRadius: 10,
-          }}
-        >
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            style={{ color: "var(--fg-dim)", flexShrink: 0 }}
-          >
-            <circle cx="11" cy="11" r="7" />
-            <path d="M21 21l-4.3-4.3" />
-          </svg>
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search by title or tag…"
-            style={{
-              flex: 1,
-              background: "transparent",
-              border: 0,
-              outline: "none",
-              color: "var(--fg)",
-              fontSize: 13,
-            }}
-          />
-        </div>
-      </div>
+        <Input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search by title or tag…"
+          style={{ height: 40, borderRadius: 10, fontSize: 13 }}
+          icon={
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="M21 21l-4.3-4.3" />
+            </svg>
+          }
+        />
+      </Card>
 
       {/* Table */}
-      <div className="glass" style={{ borderRadius: 14, overflow: "hidden" }}>
+      <Card variant="sm" style={{ borderRadius: 14, overflow: "hidden" }}>
         <div
           style={{
             display: "grid",
@@ -337,7 +312,7 @@ export default function PostsListClient() {
             </div>
           ))
         )}
-      </div>
+      </Card>
 
       <div
         style={{

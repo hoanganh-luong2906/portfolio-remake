@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Text } from "@/src/components/ui";
 import { PORTFOLIO_DATA } from "../../../../src/lib/data";
 
 export default function ExperienceHero() {
@@ -17,9 +18,9 @@ export default function ExperienceHero() {
           marginBottom: 80,
         }}
       >
-        <div className="mono" style={{ color: "var(--fg-muted)" }}>
+        <Text variant="mono" muted>
           ◍ THE ARCHIVE · {D.projects.length} PROJECTS
-        </div>
+        </Text>
         <Link
           href="/"
           className="mono"
@@ -44,19 +45,23 @@ export default function ExperienceHero() {
       </div>
 
       <div className="reveal">
-        <div className="eyebrow" style={{ marginBottom: 28 }}>
+        <Text variant="eyebrow" style={{ marginBottom: 28 }}>
           ◍ EXPERIENCES - DETAILED
-        </div>
-        <h1 className="h-display" style={{ margin: 0, fontWeight: 500 }}>
+        </Text>
+        <Text
+          variant="h-display"
+          as="h1"
+          style={{ margin: 0, fontWeight: 500 }}
+        >
           Every project,
           <br />
           <span style={{ color: "var(--fg-muted)" }}>unfolded.</span>
-        </h1>
-        <p className="body" style={{ marginTop: 32, maxWidth: 640 }}>
+        </Text>
+        <Text variant="body" style={{ marginTop: 32, maxWidth: 640 }}>
           Click any project below to expand its case study. Each entry includes
           the context, the architecture choices, the trade-offs, and what
           I&rsquo;d do differently with another year of perspective.
-        </p>
+        </Text>
       </div>
     </section>
   );

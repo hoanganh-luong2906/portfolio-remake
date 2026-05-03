@@ -2,6 +2,7 @@ import type { Post } from "../../../../src/lib/db/schema";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { Badge, Card } from "@/src/components/ui";
 import ProjectArt from "../../../../src/components/project-art";
 import { formatDate, readTime } from "../../../../src/lib/utils";
 import BlogFooter from "./BlogFooter";
@@ -39,9 +40,9 @@ export default function BlogPostDetail({
 
         <div className="reveal max-w-[880px]">
           <div className="flex gap-2 mb-6 flex-wrap">
-            <span className="chip chip-accent">{post.category}</span>
-            <span className="chip">{formatDate(post.createdAt)}</span>
-            <span className="chip">{readTime(post.body)}</span>
+            <Badge variant="accent">{post.category}</Badge>
+            <Badge>{formatDate(post.createdAt)}</Badge>
+            <Badge>{readTime(post.body)}</Badge>
           </div>
           <h1 className="m-0 text-[clamp(40px,5.6vw,84px)] font-medium tracking-[-0.025em] leading-[1.05]">
             {post.title}
@@ -83,9 +84,7 @@ export default function BlogPostDetail({
         {/* Tags */}
         <div className="max-w-[760px] mx-auto mt-7 pt-8 border-t border-line flex flex-wrap gap-1.5">
           {post.tags.map((t) => (
-            <span key={t} className="chip">
-              #{t}
-            </span>
+            <Badge key={t}>#{t}</Badge>
           ))}
         </div>
       </section>
@@ -94,26 +93,29 @@ export default function BlogPostDetail({
       <section className="shell pb-20">
         <div className="reveal grid grid-cols-2 gap-4">
           {prev ? (
-            <Link href={`/blog/${prev.slug}`} className="glass block p-7">
-              <div className="mono text-fg-muted mb-3 text-[11px]">
-                ← PREVIOUS
-              </div>
-              <div className="text-lg font-medium tracking-[-0.005em]">
-                {prev.title}
-              </div>
+            <Link href={`/blog/${prev.slug}`}>
+              <Card style={{ padding: 28 }}>
+                <div className="mono text-fg-muted mb-3 text-[11px]">
+                  ← PREVIOUS
+                </div>
+                <div className="text-lg font-medium tracking-[-0.005em]">
+                  {prev.title}
+                </div>
+              </Card>
             </Link>
           ) : (
             <div />
           )}
           {next ? (
-            <Link
-              href={`/blog/${next.slug}`}
-              className="glass block p-7 text-right"
-            >
-              <div className="mono text-fg-muted mb-3 text-[11px]">NEXT →</div>
-              <div className="text-lg font-medium tracking-[-0.005em]">
-                {next.title}
-              </div>
+            <Link href={`/blog/${next.slug}`}>
+              <Card style={{ padding: 28, textAlign: "right" }}>
+                <div className="mono text-fg-muted mb-3 text-[11px]">
+                  NEXT →
+                </div>
+                <div className="text-lg font-medium tracking-[-0.005em]">
+                  {next.title}
+                </div>
+              </Card>
             </Link>
           ) : (
             <div />

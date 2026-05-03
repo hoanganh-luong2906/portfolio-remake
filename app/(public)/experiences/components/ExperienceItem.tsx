@@ -1,6 +1,7 @@
 "use client";
 
 import type { Project } from "../../../../src/lib/data";
+import { Badge, Card, IconButton, Text } from "@/src/components/ui";
 import ProjectArt from "../../../../src/components/project-art";
 
 const PLACEHOLDER_SECTIONS = [
@@ -34,8 +35,8 @@ export default function ExperienceItem({
   onToggle,
 }: ExperienceItemProps) {
   return (
-    <article
-      className="glass"
+    <Card
+      as="article"
       style={{
         overflow: "hidden",
         transition:
@@ -82,9 +83,9 @@ export default function ExperienceItem({
         </div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
           {p.stack.slice(0, 3).map((s) => (
-            <span key={s} className="chip" style={{ height: 24, fontSize: 11 }}>
+            <Badge key={s} size="sm" style={{ height: 24, fontSize: 11 }}>
               {s}
-            </span>
+            </Badge>
           ))}
         </div>
         <div
@@ -94,21 +95,13 @@ export default function ExperienceItem({
           {p.metrics[0]?.value}{" "}
           <span style={{ opacity: 0.6 }}>{p.metrics[0]?.label}</span>
         </div>
-        <span
+        <IconButton
+          size="lg"
+          variant={open ? "accent" : "default"}
           style={{
-            width: 48,
-            height: 48,
-            borderRadius: "50%",
-            border: "1px solid var(--line)",
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexShrink: 0,
             transition:
               "transform .35s ease, background .35s ease, color .35s ease",
             transform: open ? "rotate(45deg)" : "rotate(0deg)",
-            background: open ? "var(--accent)" : "transparent",
-            color: open ? "#111" : "#fff",
           }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -119,7 +112,7 @@ export default function ExperienceItem({
               strokeLinecap="round"
             />
           </svg>
-        </span>
+        </IconButton>
       </button>
 
       {/* Expandable body */}
@@ -151,12 +144,12 @@ export default function ExperienceItem({
             >
               <ProjectArt kind={p.art} animated={open} />
             </div>
-            <p
-              className="body"
+            <Text
+              variant="body"
               style={{ marginTop: 0, fontSize: 16, lineHeight: 1.85 }}
             >
               {p.blurb}
-            </p>
+            </Text>
             <div
               style={{
                 display: "flex",
@@ -166,13 +159,9 @@ export default function ExperienceItem({
               }}
             >
               {p.stack.map((s) => (
-                <span
-                  key={s}
-                  className="chip"
-                  style={{ height: 26, fontSize: 11 }}
-                >
+                <Badge key={s} size="sm" style={{ height: 26, fontSize: 11 }}>
                   {s}
-                </span>
+                </Badge>
               ))}
             </div>
           </div>
@@ -280,6 +269,6 @@ export default function ExperienceItem({
           </div>
         </div>
       </div>
-    </article>
+    </Card>
   );
 }

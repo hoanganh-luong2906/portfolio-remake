@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button, Input, Text } from "@/src/components/ui";
 
 export default function BlogFooter() {
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -33,13 +34,13 @@ export default function BlogFooter() {
           >
             Get new posts in your inbox.
           </h3>
-          <p
-            className="body"
+          <Text
+            variant="body"
             style={{ marginTop: 12, marginBottom: 0, maxWidth: 520 }}
           >
             One email when something new goes up. No tracking, no other lists,
             easy unsubscribe.
-          </p>
+          </Text>
         </div>
         <form
           onSubmit={(e) => {
@@ -48,7 +49,7 @@ export default function BlogFooter() {
           }}
           style={{ display: "flex", gap: 8 }}
         >
-          <input
+          <Input
             type="email"
             placeholder="you@somewhere.com"
             required
@@ -57,34 +58,34 @@ export default function BlogFooter() {
               width: 280,
               padding: "0 18px",
               borderRadius: 10,
-              border: "1px solid var(--line)",
-              background: "var(--input-bg)",
-              color: "var(--fg)",
               fontSize: 14,
-              outline: "none",
             }}
           />
-          <button
+          <Button
             type="submit"
-            className="btn btn-primary"
-            style={{ height: 56, padding: "0 28px", fontSize: 15 }}
+            variant="primary"
+            size="lg"
+            style={{ padding: "0 28px", fontSize: 15 }}
+            iconPosition="right"
+            icon={
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M5 12h14M13 6l6 6-6 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            }
           >
             {isSubscribed ? "Subscribed" : "Subscribe"}
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M5 12h14M13 6l6 6-6 6"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
+          </Button>
         </form>
         {isSubscribed && (
-          <p className="body" style={{ margin: "8px 0 0", width: "100%" }}>
+          <Text variant="body" style={{ margin: "8px 0 0", width: "100%" }}>
             You are subscribed. This is currently a local placeholder flow.
-          </p>
+          </Text>
         )}
       </div>
     </section>

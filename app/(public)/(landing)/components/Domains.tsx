@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge, Text } from "@/src/components/ui";
 import { PORTFOLIO_DATA } from "../../../../src/lib/data";
 
 export default function Domains() {
@@ -28,19 +29,19 @@ export default function Domains() {
         }}
       >
         <div>
-          <div className="eyebrow" style={{ marginBottom: 28 }}>
+          <Text variant="eyebrow" style={{ marginBottom: 28 }}>
             ◍ TECHNICAL DOMAINS - 06
-          </div>
-          <h2 className="h-section" style={{ margin: 0 }}>
+          </Text>
+          <Text variant="h-section" style={{ margin: 0 }}>
             The disciplines
             <br />I work across.
-          </h2>
+          </Text>
         </div>
-        <p className="body" style={{ maxWidth: 480 }}>
+        <Text variant="body" style={{ maxWidth: 480 }}>
           I&rsquo;m a generalist by curiosity, a specialist by focus. The list
           below is what I&rsquo;ve actually shipped - production, in front of
           users - not just dabbled with on a weekend.
-        </p>
+        </Text>
       </div>
 
       <div
@@ -70,7 +71,7 @@ export default function Domains() {
               <span className="mono" style={{ color: "var(--accent)" }}>
                 /{d.id}
               </span>
-              <span className="chip">{d.meta}</span>
+              <Badge>{d.meta}</Badge>
             </div>
             <h3
               style={{
@@ -83,8 +84,8 @@ export default function Domains() {
             >
               {d.title}
             </h3>
-            <p
-              className="body"
+            <Text
+              variant="body"
               style={{
                 marginTop: 16,
                 marginBottom: "auto",
@@ -93,7 +94,7 @@ export default function Domains() {
               }}
             >
               {d.blurb}
-            </p>
+            </Text>
             <div
               style={{
                 display: "flex",
@@ -105,13 +106,13 @@ export default function Domains() {
               }}
             >
               {d.stack.map((s) => (
-                <span
+                <Badge
                   key={s}
-                  className="chip"
+                  size="sm"
                   style={{ height: 26, fontSize: 11, padding: "0 10px" }}
                 >
                   {s}
-                </span>
+                </Badge>
               ))}
             </div>
           </article>

@@ -1,3 +1,4 @@
+import { Card, Text } from "@/src/components/ui";
 import { PORTFOLIO_DATA } from "@/src/lib/data";
 
 export default function About() {
@@ -10,16 +11,16 @@ export default function About() {
       style={{ paddingTop: 140, paddingBottom: 120 }}
     >
       <div className="reveal" style={{ marginBottom: 72 }}>
-        <div className="eyebrow" style={{ marginBottom: 28 }}>
+        <Text variant="eyebrow" style={{ marginBottom: 28 }}>
           ◍ ABOUT - A SHORT BIO
-        </div>
-        <h2 className="h-section" style={{ margin: 0, maxWidth: 1100 }}>
+        </Text>
+        <Text variant="h-section" style={{ margin: 0, maxWidth: 1100 }}>
           Trained as a designer, hooked on engineering.
           <span style={{ color: "var(--fg-muted)" }}>
             {" "}
             Now I sit in the gap.
           </span>
-        </h2>
+        </Text>
       </div>
 
       <div
@@ -61,13 +62,10 @@ export default function About() {
         </div>
 
         {/* Experiences timeline */}
-        <div className="glass" style={{ padding: 32 }}>
-          <div
-            className="mono"
-            style={{ color: "var(--fg-muted)", marginBottom: 24 }}
-          >
+        <Card style={{ padding: 32 }}>
+          <Text variant="mono" muted style={{ marginBottom: 24 }}>
             - EXPERIENCE
-          </div>
+          </Text>
           <ul
             style={{
               listStyle: "none",
@@ -115,7 +113,7 @@ export default function About() {
               </li>
             ))}
           </ul>
-        </div>
+        </Card>
       </div>
     </section>
   );

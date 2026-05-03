@@ -1,3 +1,4 @@
+import { Card, Text } from "@/src/components/ui";
 import { PORTFOLIO_DATA } from "@/src/lib/data";
 
 export default function Testimonials() {
@@ -6,14 +7,14 @@ export default function Testimonials() {
   return (
     <section className="shell" style={{ paddingTop: 60, paddingBottom: 120 }}>
       <div className="reveal" style={{ marginBottom: 60 }}>
-        <div className="eyebrow" style={{ marginBottom: 28 }}>
+        <Text variant="eyebrow" style={{ marginBottom: 28 }}>
           ◍ KIND WORDS
-        </div>
-        <h2 className="h-section" style={{ margin: 0, maxWidth: 980 }}>
+        </Text>
+        <Text variant="h-section" style={{ margin: 0, maxWidth: 980 }}>
           What collaborators
           <br />
           tend to say.
-        </h2>
+        </Text>
       </div>
 
       <div
@@ -21,9 +22,9 @@ export default function Testimonials() {
         style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}
       >
         {D.testimonials.map((t, i) => (
-          <figure
+          <Card
             key={i}
-            className="glass"
+            as="figure"
             style={{
               padding: 36,
               margin: 0,
@@ -89,7 +90,7 @@ export default function Testimonials() {
                 </div>
               </div>
             </figcaption>
-          </figure>
+          </Card>
         ))}
       </div>
     </section>

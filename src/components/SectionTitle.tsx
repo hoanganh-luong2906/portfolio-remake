@@ -1,3 +1,5 @@
+import { Text } from "./ui";
+
 interface Props {
   label: string;
   children: React.ReactNode;
@@ -6,8 +8,12 @@ interface Props {
 export default function SectionTitle({ label, children }: Props) {
   return (
     <>
-      <div className="eyebrow mb-7">{label}</div>
-      <h2 className="h-section m-0">{children}</h2>
+      <Text variant="eyebrow" className="mb-7">
+        {label}
+      </Text>
+      <Text variant="h-section" style={{ margin: 0 }}>
+        {children}
+      </Text>
     </>
   );
 }

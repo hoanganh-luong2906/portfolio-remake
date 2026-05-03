@@ -1,6 +1,6 @@
+import { eq } from "drizzle-orm";
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-import { eq } from "drizzle-orm";
 import { getDb } from "@/src/lib/db";
 import { users } from "@/src/lib/db/schema";
 
@@ -20,7 +20,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       const email = user.email;
       if (!email) return false;
       const db = getDb();
-      const [row] = await db.select().from(users).where(eq(users.email, email)).limit(1);
+      const [row] = await db
+        .select()
+        .from(users)
+        .where(eq(users.email, email))
+        .limit(1);
       return !!row;
     },
     authorized({ auth: session, request: { nextUrl } }) {

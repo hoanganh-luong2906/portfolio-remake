@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Card, IconButton, Text } from "@/src/components/ui";
 import { PORTFOLIO_DATA } from "../../../../src/lib/data";
 
 export default function FAQ() {
@@ -19,25 +20,25 @@ export default function FAQ() {
         }}
       >
         <div>
-          <div className="eyebrow" style={{ marginBottom: 28 }}>
+          <Text variant="eyebrow" style={{ marginBottom: 28 }}>
             ◍ FAQS
-          </div>
-          <h2 className="h-section" style={{ margin: 0 }}>
+          </Text>
+          <Text variant="h-section" style={{ margin: 0 }}>
             Common
             <br />
             questions.
-          </h2>
-          <p className="body" style={{ marginTop: 24, maxWidth: 360 }}>
+          </Text>
+          <Text variant="body" style={{ marginTop: 24, maxWidth: 360 }}>
             Most projects start with the same five questions. Here are honest
             answers. If yours isn&rsquo;t here, the email below works.
-          </p>
+          </Text>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           {D.faqs.map((f, i) => (
-            <div
+            <Card
               key={i}
-              className={`glass faq-item ${open === i ? "open" : ""}`}
+              className={`faq-item ${open === i ? "open" : ""}`}
               onClick={() => setOpen(open === i ? -1 : i)}
               style={{ padding: 28 }}
             >
@@ -59,19 +60,7 @@ export default function FAQ() {
                 >
                   {f.q}
                 </h3>
-                <span
-                  className="faq-toggle"
-                  style={{
-                    width: 36,
-                    height: 36,
-                    borderRadius: "50%",
-                    border: "1px solid var(--line)",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
+                <IconButton size="md" className="faq-toggle">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                     <path
                       d="M12 5v14M5 12h14"
@@ -80,14 +69,14 @@ export default function FAQ() {
                       strokeLinecap="round"
                     />
                   </svg>
-                </span>
+                </IconButton>
               </div>
               <div className="faq-body">
-                <p className="body" style={{ margin: 0, fontSize: 15 }}>
+                <Text variant="body" style={{ margin: 0, fontSize: 15 }}>
                   {f.a}
-                </p>
+                </Text>
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </div>

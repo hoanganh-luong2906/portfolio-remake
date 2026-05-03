@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useCreatePost, usePost, useUpdatePost } from "@/app/hooks/usePost";
 import ProjectArt from "@/src/components/project-art";
+import { Text } from "@/src/components/ui";
 import MarkdownEditor from "./editor";
 
 export const CATEGORIES = ["Engineering", "Design", "Career", "Process", "OSS"];
@@ -44,12 +45,9 @@ function Field({
 }) {
   return (
     <div style={{ marginBottom: 18 }}>
-      <div
-        className="mono"
-        style={{ fontSize: 10, color: "var(--fg-dim)", marginBottom: 8 }}
-      >
+      <Text variant="mono" dim style={{ fontSize: 10, marginBottom: 8 }}>
         - {label}
-      </div>
+      </Text>
       {children}
     </div>
   );

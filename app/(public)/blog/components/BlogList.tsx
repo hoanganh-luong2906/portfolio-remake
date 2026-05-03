@@ -3,6 +3,7 @@
 import type { Post } from "../../../../src/lib/db/schema";
 import Link from "next/link";
 import { useState } from "react";
+import { Badge } from "@/src/components/ui";
 import ProjectArt from "../../../../src/components/project-art";
 import { formatDate, readTime } from "../../../../src/lib/utils";
 import FeaturedPost from "./FeaturedPost";
@@ -68,16 +69,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                   animated={false}
                 />
                 <div className="absolute left-3.5 top-3.5">
-                  <span
-                    className="chip"
-                    style={{
-                      background: "rgba(0,0,0,0.55)",
-                      color: "#fff",
-                      borderColor: "rgba(255,255,255,0.18)",
-                    }}
-                  >
-                    {post.category}
-                  </span>
+                  <Badge variant="glass">{post.category}</Badge>
                 </div>
               </div>
               <div className="p-7 flex flex-col flex-1">
@@ -93,13 +85,13 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                 <div className="mt-auto pt-4 border-t border-line flex justify-between items-center">
                   <div className="flex gap-1 flex-wrap">
                     {post.tags.slice(0, 2).map((t) => (
-                      <span
+                      <Badge
                         key={t}
-                        className="chip"
+                        size="sm"
                         style={{ height: 22, fontSize: 10 }}
                       >
                         #{t}
-                      </span>
+                      </Badge>
                     ))}
                   </div>
                   <span className="text-accent font-semibold text-xs">

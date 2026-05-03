@@ -1,3 +1,4 @@
+import { Text } from "@/src/components/ui";
 import { PORTFOLIO_DATA } from "../../../../src/lib/data";
 
 export default function BlogHero() {
@@ -16,30 +17,31 @@ export default function BlogHero() {
           marginBottom: 80,
         }}
       >
-        <div className="mono" style={{ color: "var(--fg-muted)" }}>
+        <Text variant="mono" muted>
           ◍ WRITING · {D.blog.length} POSTS
-        </div>
-        <div className="mono" style={{ color: "var(--fg-muted)" }}>
+        </Text>
+        <Text variant="mono" muted>
           UPDATED - APR 2026
-        </div>
+        </Text>
       </div>
 
       <div className="reveal">
-        <div className="eyebrow" style={{ marginBottom: 28 }}>
+        <Text variant="eyebrow" style={{ marginBottom: 28 }}>
           ◍ BLOG - NOTES & ESSAYS
-        </div>
-        <h1
-          className="h-display"
+        </Text>
+        <Text
+          variant="h-display"
+          as="h1"
           style={{ margin: 0, fontWeight: 500, maxWidth: 1100 }}
         >
           Notes from
           <br />
           <span style={{ color: "var(--fg-muted)" }}>the workshop.</span>
-        </h1>
-        <p className="body" style={{ marginTop: 32, maxWidth: 640 }}>
+        </Text>
+        <Text variant="body" style={{ marginTop: 32, maxWidth: 640 }}>
           Short writing on engineering, design systems, and the trade-offs that
           don&rsquo;t fit in a tweet. Roughly one post a month, sometimes two.
-        </p>
+        </Text>
       </div>
     </section>
   );

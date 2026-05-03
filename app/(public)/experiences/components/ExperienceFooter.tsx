@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Button, Text } from "@/src/components/ui";
 
 export default function ExperienceFooter() {
   return (
@@ -30,38 +30,43 @@ export default function ExperienceFooter() {
           >
             Got a project in mind?
           </h3>
-          <p
-            className="body"
+          <Text
+            variant="body"
             style={{ marginTop: 12, marginBottom: 0, maxWidth: 480 }}
           >
             The fastest way to start a conversation is an email with one
             paragraph and one rough deadline.
-          </p>
+          </Text>
         </div>
         <div style={{ display: "flex", gap: 10 }}>
-          <Link
+          <Button
             href="/#contact"
-            className="btn btn-primary"
-            style={{ height: 56, padding: "0 28px", fontSize: 15 }}
+            variant="primary"
+            size="lg"
+            style={{ padding: "0 28px", fontSize: 15 }}
+            iconPosition="right"
+            icon={
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M5 12h14M13 6l6 6-6 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            }
           >
             Contact me
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M5 12h14M13 6l6 6-6 6"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Link>
-          <Link
+          </Button>
+          <Button
             href="/"
-            className="btn btn-ghost"
-            style={{ height: 56, padding: "0 24px", fontSize: 15 }}
+            variant="ghost"
+            size="lg"
+            style={{ padding: "0 24px", fontSize: 15 }}
           >
             Back to portfolio
-          </Link>
+          </Button>
         </div>
       </div>
     </section>
