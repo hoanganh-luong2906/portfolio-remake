@@ -1,9 +1,11 @@
+import type { Experience } from "@/src/lib/db/schema";
 import { Card, Text } from "@/src/components/ui";
-import { PORTFOLIO_DATA } from "@/src/lib/data";
 
-export default function About() {
-  const D = PORTFOLIO_DATA;
-
+export default function About({
+  experiences,
+}: {
+  experiences: Experience[];
+}) {
   return (
     <section
       id="about"
@@ -76,16 +78,16 @@ export default function About() {
               gap: 0,
             }}
           >
-            {D.experiences.map((e, i) => (
+            {experiences.map((e, i) => (
               <li
-                key={i}
+                key={e.id}
                 style={{
                   display: "grid",
                   gridTemplateColumns: "120px 1fr auto",
                   gap: 16,
                   padding: "20px 0",
                   borderBottom:
-                    i < D.experiences.length - 1
+                    i < experiences.length - 1
                       ? "1px solid var(--line)"
                       : "none",
                   alignItems: "baseline",

@@ -9,6 +9,8 @@ function getActive(pathname: string) {
   if (pathname === "/admin") return "dashboard";
   if (pathname === "/admin/posts/new") return "new";
   if (pathname.startsWith("/admin/posts")) return "posts";
+  if (pathname === "/admin/projects") return "projects";
+  if (pathname === "/admin/experiences") return "experiences";
   return "dashboard";
 }
 

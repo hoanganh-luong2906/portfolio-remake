@@ -2,13 +2,18 @@
 
 import Link from "next/link";
 import { useAuth } from "@/app/hooks/useAuth";
+import { useExperiences } from "@/app/hooks/useExperience";
 import { usePosts } from "@/app/hooks/usePost";
+import { useProjects } from "@/app/hooks/useProject";
 
 export default function AdminPage() {
   const { firstName } = useAuth();
   const { data: allPosts = [] } = usePosts();
+  const { data: allProjects = [] } = useProjects();
+  const { data: allExperiences = [] } = useExperiences();
   const published = allPosts.filter((p) => p.published).length;
   const drafts = allPosts.length - published;
+  const featuredProjects = allProjects.filter((p) => p.featured).length;
 
   const recent = [...allPosts]
     .sort(
@@ -47,7 +52,7 @@ export default function AdminPage() {
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
           gap: 18,
-          marginBottom: 44,
+          marginBottom: 24,
         }}
       >
         <StatCard
@@ -64,10 +69,38 @@ export default function AdminPage() {
           hint="Saved but not yet live. Resume from the editor."
         />
         <StatCard
-          label="- TOTAL"
+          label="- TOTAL POSTS"
           value={allPosts.length}
           delta="all-time"
           hint="Everything written, including unpublished work."
+        />
+      </div>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: 18,
+          marginBottom: 44,
+        }}
+      >
+        <StatCard
+          label="- PROJECTS"
+          value={allProjects.length}
+          delta="case studies"
+          hint="All projects — edit on the Projects page."
+        />
+        <StatCard
+          label="- FEATURED"
+          value={featuredProjects}
+          delta="on home page"
+          hint="Shown in the Projects section on the homepage."
+          accent
+        />
+        <StatCard
+          label="- EXPERIENCES"
+          value={allExperiences.length}
+          delta="career entries"
+          hint="All roles in the career timeline."
         />
       </div>
 
@@ -185,7 +218,7 @@ export default function AdminPage() {
         </div>
 
         {/* Quick actions */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           <Link
             href="/admin/posts/new"
             className="glass"
@@ -318,6 +351,76 @@ export default function AdminPage() {
                   />
                 </svg>
               </span>
+            </div>
+          </Link>
+
+          <Link
+            href="/admin/projects"
+            className="glass"
+            style={{
+              padding: 20,
+              borderRadius: 16,
+              display: "flex",
+              flexDirection: "column",
+              gap: 12,
+            }}
+          >
+            <div
+              className="mono"
+              style={{ fontSize: 11, color: "var(--fg-muted)" }}
+            >
+              - PROJECTS
+            </div>
+            <div
+              style={{
+                fontSize: 20,
+                fontWeight: 500,
+                lineHeight: 1.2,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Case study<br />management.
+            </div>
+            <div
+              className="mono"
+              style={{ fontSize: 11, color: "var(--fg-muted)", marginTop: "auto" }}
+            >
+              {allProjects.length} PROJECTS · {featuredProjects} FEATURED
+            </div>
+          </Link>
+
+          <Link
+            href="/admin/experiences"
+            className="glass"
+            style={{
+              padding: 20,
+              borderRadius: 16,
+              display: "flex",
+              flexDirection: "column",
+              gap: 12,
+            }}
+          >
+            <div
+              className="mono"
+              style={{ fontSize: 11, color: "var(--fg-muted)" }}
+            >
+              - EXPERIENCES
+            </div>
+            <div
+              style={{
+                fontSize: 20,
+                fontWeight: 500,
+                lineHeight: 1.2,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Career timeline<br />management.
+            </div>
+            <div
+              className="mono"
+              style={{ fontSize: 11, color: "var(--fg-muted)", marginTop: "auto" }}
+            >
+              {allExperiences.length} ROLES
             </div>
           </Link>
         </div>

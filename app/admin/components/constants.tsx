@@ -21,4 +21,26 @@ export const NAV_ITEMS = [
       />
     ),
   },
+  {
+    id: "projects",
+    label: "Projects",
+    href: "/admin/projects",
+    icon: (
+      <path
+        d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4zM2 4h2v2H2zm0 5h2v2H2zm0 5h2v2H2z"
+        fill="currentColor"
+      />
+    ),
+  },
+  {
+    id: "experiences",
+    label: "Experiences",
+    href: "/admin/experiences",
+    icon: (
+      <path
+        d="M20 6h-3V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-11-2h6v2H9V4zm11 15H4V8h16v11z"
+        fill="currentColor"
+      />
+    ),
+  },
 ];

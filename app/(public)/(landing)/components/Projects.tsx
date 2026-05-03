@@ -1,13 +1,13 @@
 "use client";
 
+import type { ArtKind } from "@/src/lib/data";
+import type { Project } from "@/src/lib/db/schema";
 import { useState } from "react";
 import { Badge, Button, Card, IconButton, Text } from "@/src/components/ui";
 import ProjectArt from "../../../../src/components/project-art";
-import { PORTFOLIO_DATA } from "../../../../src/lib/data";
 
-export default function Projects() {
-  const D = PORTFOLIO_DATA;
-  const [hovered, setHovered] = useState<string | null>(null);
+export default function Projects({ projects }: { projects: Project[] }) {
+  const [hovered, setHovered] = useState<number | null>(null);
 
   return (
     <section
@@ -47,7 +47,7 @@ export default function Projects() {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-        {D.projects.map((p, i) => {
+        {projects.map((p, i) => {
           const reverse = i % 2 === 1;
           return (
             <Card
@@ -74,7 +74,7 @@ export default function Projects() {
                   background: "#111",
                 }}
               >
-                <ProjectArt kind={p.art} animated={hovered === p.id} />
+                <ProjectArt kind={p.art as ArtKind} animated={hovered === p.id} />
                 <div
                   style={{
                     position: "absolute",
@@ -108,7 +108,7 @@ export default function Projects() {
                 >
                   <div>
                     <Text variant="mono" muted style={{ marginBottom: 16 }}>
-                      PROJECT /{p.id}
+                      PROJECT /{String(p.id).padStart(2, "0")}
                     </Text>
                     <h3
                       style={{
@@ -119,7 +119,7 @@ export default function Projects() {
                         lineHeight: 1.05,
                       }}
                     >
-                      {p.name}
+                      {p.title}
                     </h3>
                   </div>
                   <IconButton
@@ -143,7 +143,7 @@ export default function Projects() {
                   variant="body"
                   style={{ marginTop: 20, marginBottom: 24, maxWidth: 520 }}
                 >
-                  {p.blurb}
+                  {p.summary}
                 </Text>
 
                 <div

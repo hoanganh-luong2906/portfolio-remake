@@ -1,13 +1,16 @@
 "use client";
 
+import type { Project } from "../../../../src/lib/db/schema";
 import { useState } from "react";
-import { PORTFOLIO_DATA } from "../../../../src/lib/data";
 import ExperienceItem from "./ExperienceItem";
 
-export default function ExperiencesList() {
-  const D = PORTFOLIO_DATA;
-  const [openId, setOpenId] = useState<string | null>(
-    D.projects[0]?.id ?? null,
+export default function ExperiencesList({
+  projects,
+}: {
+  projects: Project[];
+}) {
+  const [openId, setOpenId] = useState<number | null>(
+    projects[0]?.id ?? null,
   );
 
   return (
@@ -16,7 +19,7 @@ export default function ExperiencesList() {
         className="reveal"
         style={{ display: "flex", flexDirection: "column", gap: 12 }}
       >
-        {D.projects.map((p) => (
+        {projects.map((p) => (
           <ExperienceItem
             key={p.id}
             p={p}

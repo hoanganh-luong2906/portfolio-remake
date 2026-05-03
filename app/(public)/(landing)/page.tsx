@@ -1,3 +1,5 @@
+import { getAllExperiences } from "@/src/lib/db/queries/experiences";
+import { getFeaturedProjects } from "@/src/lib/db/queries/projects";
 import {
   About,
   Contact,
@@ -10,7 +12,12 @@ import {
   Testimonials,
 } from "./components";
 
-export default function Home() {
+export default async function Home() {
+  const [projects, experiences] = await Promise.all([
+    getFeaturedProjects(),
+    getAllExperiences(),
+  ]);
+
   return (
     <>
       <HomeClient />
@@ -18,8 +25,8 @@ export default function Home() {
         <Hero />
         <Marquee />
         <Domains />
-        <Projects />
-        <About />
+        <Projects projects={projects} />
+        <About experiences={experiences} />
         <Testimonials />
         <FAQ />
         <Contact />

@@ -1,0 +1,59 @@
+import type { NewProject } from "@/src/lib/db/schema";
+import { auth } from "@/auth";
+import {
+  deleteProject,
+  getProjectById,
+  updateProject,
+} from "@/src/lib/db/queries/projects";
+
+function unauthorized() {
+  return Response.json({ error: "Unauthorized" }, { status: 401 });
+}
+
+export async function GET(
+  _request: Request,
+  ctx: RouteContext<"/api/projects/[id]">,
+) {
+  const session = await auth();
+  if (!session?.user) return unauthorized();
+
+  const { id } = await ctx.params;
+  const project = await getProjectById(Number(id));
+  if (!project) return Response.json({ error: "Not found" }, { status: 404 });
+
+  return Response.json(project);
+}
+
+export async function PUT(
+  request: Request,
+  ctx: RouteContext<"/api/projects/[id]">,
+) {
+  const session = await auth();
+  if (!session?.user) return unauthorized();
+
+  let body: Partial<NewProject>;
+  try {
+    body = await request.json();
+  } catch {
+    return Response.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
+  const { id } = await ctx.params;
+  const project = await updateProject(Number(id), body);
+  if (!project) return Response.json({ error: "Not found" }, { status: 404 });
+
+  return Response.json(project);
+}
+
+export async function DELETE(
+  _request: Request,
+  ctx: RouteContext<"/api/projects/[id]">,
+) {
+  const session = await auth();
+  if (!session?.user) return unauthorized();
+
+  const { id } = await ctx.params;
+  await deleteProject(Number(id));
+
+  return new Response(null, { status: 204 });
+}

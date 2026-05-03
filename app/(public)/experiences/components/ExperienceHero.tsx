@@ -1,10 +1,7 @@
 import Link from "next/link";
 import { Text } from "@/src/components/ui";
-import { PORTFOLIO_DATA } from "../../../../src/lib/data";
 
-export default function ExperienceHero() {
-  const D = PORTFOLIO_DATA;
-
+export default function ExperienceHero({ count }: { count: number }) {
   return (
     <section className="shell" style={{ paddingTop: 160, paddingBottom: 80 }}>
       <div
@@ -19,7 +16,7 @@ export default function ExperienceHero() {
         }}
       >
         <Text variant="mono" muted>
-          ◍ THE ARCHIVE · {D.projects.length} PROJECTS
+          ◍ THE ARCHIVE · {count} PROJECTS
         </Text>
         <Link
           href="/"

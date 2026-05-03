@@ -29,6 +29,12 @@ function getBreadcrumb(pathname: string) {
   if (pathname === "/admin/posts") {
     return [{ label: "Admin", href: "/admin" }, { label: "Posts" }];
   }
+  if (pathname === "/admin/projects") {
+    return [{ label: "Admin", href: "/admin" }, { label: "Projects" }];
+  }
+  if (pathname === "/admin/experiences") {
+    return [{ label: "Admin", href: "/admin" }, { label: "Experiences" }];
+  }
   return [{ label: "Admin", href: "/admin" }];
 }
 

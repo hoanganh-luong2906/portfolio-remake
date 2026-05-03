@@ -1,6 +1,7 @@
 "use client";
 
-import type { Project } from "../../../../src/lib/data";
+import type { ArtKind } from "@/src/lib/data";
+import type { Project } from "../../../../src/lib/db/schema";
 import { Badge, Card, IconButton, Text } from "@/src/components/ui";
 import ProjectArt from "../../../../src/components/project-art";
 
@@ -60,7 +61,7 @@ export default function ExperienceItem({
         }}
       >
         <span className="mono" style={{ color: "var(--accent)", fontSize: 14 }}>
-          /{p.id}
+          /{String(p.id).padStart(2, "0")}
         </span>
         <div>
           <div
@@ -78,7 +79,7 @@ export default function ExperienceItem({
               lineHeight: 1,
             }}
           >
-            {p.name}
+            {p.title}
           </h2>
         </div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
@@ -142,13 +143,13 @@ export default function ExperienceItem({
                 marginBottom: 24,
               }}
             >
-              <ProjectArt kind={p.art} animated={open} />
+              <ProjectArt kind={p.art as ArtKind} animated={open} />
             </div>
             <Text
               variant="body"
               style={{ marginTop: 0, fontSize: 16, lineHeight: 1.85 }}
             >
-              {p.blurb}
+              {p.summary}
             </Text>
             <div
               style={{
