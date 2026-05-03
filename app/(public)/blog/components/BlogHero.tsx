@@ -1,8 +1,11 @@
+"use client";
+
+import { usePublicPosts } from "@/app/hooks/usePublicData";
 import { Text } from "@/src/components/ui";
-import { PORTFOLIO_DATA } from "../../../../src/lib/data";
 
 export default function BlogHero() {
-  const D = PORTFOLIO_DATA;
+  const { data: posts, isLoading } = usePublicPosts();
+  const count = posts?.length ?? "—";
 
   return (
     <section className="shell" style={{ paddingTop: 160, paddingBottom: 60 }}>
@@ -18,7 +21,7 @@ export default function BlogHero() {
         }}
       >
         <Text variant="mono" muted>
-          ◍ WRITING · {D.blog.length} POSTS
+          ◍ WRITING · {isLoading ? "—" : count} POSTS
         </Text>
         <Text variant="mono" muted>
           UPDATED - APR 2026

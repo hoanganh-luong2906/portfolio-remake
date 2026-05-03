@@ -3,15 +3,58 @@
 import type { Post } from "../../../../src/lib/db/schema";
 import Link from "next/link";
 import { useState } from "react";
+import { usePublicPosts } from "@/app/hooks/usePublicData";
 import { Badge } from "@/src/components/ui";
 import ProjectArt from "../../../../src/components/project-art";
 import { formatDate, readTime } from "../../../../src/lib/utils";
 import FeaturedPost from "./FeaturedPost";
 
-export default function BlogList({ posts }: { posts: Post[] }) {
+/* ---- Skeleton shapes ---- */
+function SkeletonFeatured() {
+  return (
+    <section className="shell pb-[60px]">
+      <div
+        className="skeleton reveal rounded-[var(--radius)] overflow-hidden"
+        style={{ height: 420 }}
+      />
+    </section>
+  );
+}
+
+function SkeletonCard() {
+  return (
+    <div className="glass rounded-[var(--radius-sm)] overflow-hidden flex flex-col">
+      <div className="skeleton aspect-[16/10]" />
+      <div className="p-7 flex flex-col gap-3">
+        <div className="skeleton h-3 w-24 rounded" />
+        <div className="skeleton h-5 w-3/4 rounded" />
+        <div className="skeleton h-4 w-full rounded" />
+        <div className="skeleton h-4 w-5/6 rounded" />
+      </div>
+    </div>
+  );
+}
+
+export default function BlogList({ count }: { count?: number }) {
+  const { data: posts, isLoading } = usePublicPosts();
   const [filter, setFilter] = useState("All");
 
-  if (posts.length === 0) {
+  if (isLoading) {
+    return (
+      <>
+        <SkeletonFeatured />
+        <section className="shell pb-[100px]">
+          <div className="reveal grid grid-cols-3 gap-4">
+            {Array.from({ length: count ?? 3 }).map((_, i) => (
+              <SkeletonCard key={i} />
+            ))}
+          </div>
+        </section>
+      </>
+    );
+  }
+
+  if (!posts || posts.length === 0) {
     return (
       <section className="shell pb-[100px]">
         <div className="text-center text-fg-muted py-20">

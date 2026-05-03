@@ -114,7 +114,7 @@ export default function PostEditorClient({ mode, postId }: Props) {
         .map((t) => t.trim())
         .filter(Boolean),
       body: form.body,
-      published: publishIntentRef.current,
+      status: (publishIntentRef.current ? "published" : "draft") as import("@/src/lib/db/schema").ContentStatus,
     };
     if (mode === "new") {
       createMutation.mutate(data, {

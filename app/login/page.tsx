@@ -16,6 +16,11 @@ export default async function LoginPage({
 
   const { error, callbackUrl } = await searchParams;
 
+  const handleSignIn = async () => {
+    "use server";
+    await signIn("google", { redirectTo: callbackUrl ?? "/admin" });
+  };
+
   return (
     <div className="min-h-screen grid grid-cols-[1.05fr_1fr]">
       {/* Left: brand panel */}
@@ -112,12 +117,7 @@ export default async function LoginPage({
             </Alert>
           )}
 
-          <form
-            action={async () => {
-              "use server";
-              await signIn("google", { redirectTo: callbackUrl ?? "/admin" });
-            }}
-          >
+          <form action={handleSignIn}>
             <button
               type="submit"
               className="mt-7 w-full h-13 rounded-xl text-sm font-bold! bg-fg! text-bg! border border-fg inline-flex items-center justify-center gap-3 cursor-pointer"

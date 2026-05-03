@@ -1,15 +1,12 @@
-import { getAllProjects } from "@/src/lib/db/queries/projects";
 import ExperienceFooter from "./components/ExperienceFooter";
 import ExperienceHero from "./components/ExperienceHero";
 import ExperiencesList from "./components/ExperiencesList";
 
-export default async function ExperiencesPage() {
-  const projects = await getAllProjects();
-
+export default function ExperiencesPage() {
   return (
     <main>
-      <ExperienceHero count={projects.length} />
-      <ExperiencesList projects={projects} />
+      <ExperienceHero />
+      <ExperiencesList />
       <ExperienceFooter />
     </main>
   );

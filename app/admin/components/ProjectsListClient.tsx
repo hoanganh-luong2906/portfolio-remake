@@ -1,7 +1,7 @@
 "use client";
 
 import type { ArtKind } from "@/src/lib/data";
-import type { Metric, NewProject, Project } from "@/src/lib/db/schema";
+import type { ContentStatus, Metric, NewProject, Project } from "@/src/lib/db/schema";
 import { useMemo, useState } from "react";
 import {
   useCreateProject,
@@ -36,6 +36,7 @@ interface ProjectForm {
   summary: string;
   metrics: Metric[];
   featured: boolean;
+  status: ContentStatus;
 }
 
 const BLANK: ProjectForm = {
@@ -50,6 +51,7 @@ const BLANK: ProjectForm = {
   summary: "",
   metrics: [{ value: "", label: "" }],
   featured: false,
+  status: "draft",
 };
 
 function projectToForm(p: Project): ProjectForm {
@@ -65,6 +67,7 @@ function projectToForm(p: Project): ProjectForm {
     summary: p.summary,
     metrics: p.metrics.length ? p.metrics : [{ value: "", label: "" }],
     featured: p.featured,
+    status: p.status as ContentStatus,
   };
 }
 
@@ -84,6 +87,7 @@ function formToPayload(f: ProjectForm): Partial<NewProject> {
     summary: f.summary,
     metrics: f.metrics.filter((m) => m.value || m.label),
     featured: f.featured,
+    status: f.status,
   };
 }
 
@@ -517,6 +521,20 @@ export default function ProjectsListClient() {
             <Text style={{ fontSize: 13 }}>Featured on home page</Text>
           </label>
 
+          {/* Status */}
+          <div style={{ marginTop: 14 }}>
+            <Text variant="mono" dim style={{ fontSize: 10, letterSpacing: "0.1em", marginBottom: 8 }}>STATUS</Text>
+            <select
+              style={{ ...monoStyle, width: 200 }}
+              value={editing.form.status}
+              onChange={(e) => setForm({ status: e.target.value as ContentStatus })}
+            >
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+              <option value="archived">Archived</option>
+            </select>
+          </div>
+
           {/* Actions */}
           <div style={{ display: "flex", gap: 10, marginTop: 22 }}>
             <button
@@ -556,7 +574,7 @@ export default function ProjectsListClient() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "60px 1fr 1fr 120px 100px 80px",
+            gridTemplateColumns: "60px 1fr 1fr 120px 100px 100px 80px",
             padding: "14px 20px",
             gap: 16,
             borderBottom: "1px solid var(--line)",
@@ -568,6 +586,7 @@ export default function ProjectsListClient() {
           <span style={{ color: "var(--fg-dim)", fontSize: 10 }}>PROJECT</span>
           <span style={{ color: "var(--fg-dim)", fontSize: 10 }}>STACK</span>
           <span style={{ color: "var(--fg-dim)", fontSize: 10 }}>YEAR</span>
+          <span style={{ color: "var(--fg-dim)", fontSize: 10 }}>STATUS</span>
           <span style={{ color: "var(--fg-dim)", fontSize: 10 }}>FEATURED</span>
           <span style={{ color: "var(--fg-dim)", fontSize: 10 }} />
         </div>
@@ -588,7 +607,7 @@ export default function ProjectsListClient() {
               key={p.id}
               style={{
                 display: "grid",
-                gridTemplateColumns: "60px 1fr 1fr 120px 100px 80px",
+                gridTemplateColumns: "60px 1fr 1fr 120px 100px 100px 80px",
                 padding: "16px 20px",
                 gap: 16,
                 alignItems: "center",
@@ -650,6 +669,24 @@ export default function ProjectsListClient() {
               >
                 {p.year}
               </div>
+
+              {/* Status chip */}
+              <span
+                className="chip"
+                style={{
+                  height: 24,
+                  fontSize: 10,
+                  background: p.status === "published"
+                    ? "color-mix(in oklab, var(--accent) 14%, transparent)"
+                    : "var(--surface-2)",
+                  color: p.status === "published" ? "var(--accent)" : "var(--fg-muted)",
+                  borderColor: p.status === "published"
+                    ? "color-mix(in oklab, var(--accent) 30%, transparent)"
+                    : "var(--line)",
+                }}
+              >
+                {p.status}
+              </span>
 
               {/* Featured toggle */}
               <button

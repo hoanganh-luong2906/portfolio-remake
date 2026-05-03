@@ -45,13 +45,14 @@ export default function ExperienceItem({
       }}
     >
       {/* Header */}
-      <button
+      <div
+        role="button"
+        tabIndex={0}
         onClick={onToggle}
+        onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onToggle()}
         style={{
           width: "100%",
           textAlign: "left",
-          background: "transparent",
-          border: 0,
           cursor: "pointer",
           padding: 36,
           display: "grid",
@@ -114,7 +115,7 @@ export default function ExperienceItem({
             />
           </svg>
         </IconButton>
-      </button>
+      </div>
 
       {/* Expandable body */}
       <div

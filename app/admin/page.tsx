@@ -11,7 +11,7 @@ export default function AdminPage() {
   const { data: allPosts = [] } = usePosts();
   const { data: allProjects = [] } = useProjects();
   const { data: allExperiences = [] } = useExperiences();
-  const published = allPosts.filter((p) => p.published).length;
+  const published = allPosts.filter((p) => p.status === "published").length;
   const drafts = allPosts.length - published;
   const featuredProjects = allProjects.filter((p) => p.featured).length;
 
@@ -176,7 +176,7 @@ export default function AdminPage() {
                         marginTop: 4,
                       }}
                     >
-                      {p.published ? "PUBLISHED" : "DRAFT"} ·{" "}
+                      {p.status === "published" ? "PUBLISHED" : "DRAFT"} ·{" "}
                       {new Date(p.updatedAt).toLocaleDateString()}
                     </div>
                   </div>
@@ -185,16 +185,19 @@ export default function AdminPage() {
                     style={{
                       height: 24,
                       fontSize: 10,
-                      background: p.published
-                        ? "color-mix(in oklab, var(--accent) 14%, transparent)"
-                        : undefined,
-                      color: p.published ? "var(--accent)" : undefined,
-                      borderColor: p.published
-                        ? "color-mix(in oklab, var(--accent) 30%, transparent)"
-                        : undefined,
+                      background:
+                        p.status === "published"
+                          ? "color-mix(in oklab, var(--accent) 14%, transparent)"
+                          : undefined,
+                      color:
+                        p.status === "published" ? "var(--accent)" : undefined,
+                      borderColor:
+                        p.status === "published"
+                          ? "color-mix(in oklab, var(--accent) 30%, transparent)"
+                          : undefined,
                     }}
                   >
-                    {p.published ? "LIVE" : "DRAFT"}
+                    {p.status === "published" ? "LIVE" : "DRAFT"}
                   </span>
                   <svg
                     width="14"
@@ -379,11 +382,17 @@ export default function AdminPage() {
                 letterSpacing: "-0.01em",
               }}
             >
-              Case study<br />management.
+              Case study
+              <br />
+              management.
             </div>
             <div
               className="mono"
-              style={{ fontSize: 11, color: "var(--fg-muted)", marginTop: "auto" }}
+              style={{
+                fontSize: 11,
+                color: "var(--fg-muted)",
+                marginTop: "auto",
+              }}
             >
               {allProjects.length} PROJECTS · {featuredProjects} FEATURED
             </div>
@@ -414,11 +423,17 @@ export default function AdminPage() {
                 letterSpacing: "-0.01em",
               }}
             >
-              Career timeline<br />management.
+              Career timeline
+              <br />
+              management.
             </div>
             <div
               className="mono"
-              style={{ fontSize: 11, color: "var(--fg-muted)", marginTop: "auto" }}
+              style={{
+                fontSize: 11,
+                color: "var(--fg-muted)",
+                marginTop: "auto",
+              }}
             >
               {allExperiences.length} ROLES
             </div>

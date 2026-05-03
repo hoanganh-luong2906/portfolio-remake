@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
+import { usePublicProjects } from "@/app/hooks/usePublicData";
 import { Text } from "@/src/components/ui";
 
-export default function ExperienceHero({ count }: { count: number }) {
+export default function ExperienceHero() {
+  const { data: projects, isLoading } = usePublicProjects();
+  const count = projects?.length ?? "—";
   return (
     <section className="shell" style={{ paddingTop: 160, paddingBottom: 80 }}>
       <div
@@ -16,7 +21,7 @@ export default function ExperienceHero({ count }: { count: number }) {
         }}
       >
         <Text variant="mono" muted>
-          ◍ THE ARCHIVE · {count} PROJECTS
+          ◍ THE ARCHIVE · {isLoading ? "—" : count} PROJECTS
         </Text>
         <Link
           href="/"

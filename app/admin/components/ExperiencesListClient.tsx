@@ -1,6 +1,6 @@
 "use client";
 
-import type { Experience, NewExperience } from "@/src/lib/db/schema";
+import type { ContentStatus, Experience, NewExperience } from "@/src/lib/db/schema";
 import { useMemo, useState } from "react";
 import {
   useCreateExperience,
@@ -16,6 +16,7 @@ interface ExperienceForm {
   company: string;
   note: string;
   current: boolean;
+  status: ContentStatus;
 }
 
 const BLANK: ExperienceForm = {
@@ -24,6 +25,7 @@ const BLANK: ExperienceForm = {
   company: "",
   note: "",
   current: false,
+  status: "published",
 };
 
 function expToForm(e: Experience): ExperienceForm {
@@ -33,6 +35,7 @@ function expToForm(e: Experience): ExperienceForm {
     company: e.company,
     note: e.note,
     current: e.current,
+    status: e.status as ContentStatus,
   };
 }
 
@@ -309,6 +312,19 @@ export default function ExperiencesListClient() {
             <Text style={{ fontSize: 13 }}>Current role</Text>
           </label>
 
+          <div style={{ marginTop: 14 }}>
+            <Text variant="mono" dim style={{ fontSize: 10, letterSpacing: "0.1em", marginBottom: 8 }}>STATUS</Text>
+            <select
+              style={{ ...monoStyle, width: 200 }}
+              value={editing.form.status}
+              onChange={(e) => setForm({ status: e.target.value as ContentStatus })}
+            >
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+              <option value="archived">Archived</option>
+            </select>
+          </div>
+
           <div style={{ display: "flex", gap: 10, marginTop: 22 }}>
             <button
               onClick={handleSave}
@@ -467,21 +483,24 @@ export default function ExperiencesListClient() {
               {/* Company */}
               <div style={{ fontSize: 13, fontWeight: 500 }}>{e.company}</div>
 
-              {/* Current badge */}
+              {/* Current badge / Status chip */}
               <div>
-                {e.current && (
-                  <Badge
-                    size="sm"
-                    style={{
-                      height: 22,
-                      fontSize: 10,
-                      background: "var(--accent)",
-                      color: "var(--accent-ink, #000)",
-                    }}
-                  >
-                    CURRENT
-                  </Badge>
-                )}
+                <span
+                  className="chip"
+                  style={{
+                    height: 22,
+                    fontSize: 10,
+                    background: e.status === "published"
+                      ? "color-mix(in oklab, var(--accent) 14%, transparent)"
+                      : "var(--surface-2)",
+                    color: e.status === "published" ? "var(--accent)" : "var(--fg-muted)",
+                    borderColor: e.status === "published"
+                      ? "color-mix(in oklab, var(--accent) 30%, transparent)"
+                      : "var(--line)",
+                  }}
+                >
+                  {e.status}
+                </span>
               </div>
 
               {/* Edit */}

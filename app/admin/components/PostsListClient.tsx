@@ -18,8 +18,8 @@ export default function PostsListClient() {
         filter === "all"
           ? true
           : filter === "published"
-            ? p.published
-            : !p.published,
+            ? p.status === "published"
+            : p.status !== "published",
       )
       .filter(
         (p) =>
@@ -33,8 +33,8 @@ export default function PostsListClient() {
       );
   }, [posts, filter, query]);
 
-  const handleToggle = (id: number, published: boolean) => {
-    updateMutation.mutate({ id, data: { published: !published } });
+  const handleToggle = (id: number, isPublished: boolean) => {
+    updateMutation.mutate({ id, data: { status: isPublished ? "draft" : "published" } });
   };
 
   const handleDelete = (id: number) => {
@@ -48,12 +48,12 @@ export default function PostsListClient() {
     {
       id: "published" as const,
       label: "Published",
-      count: posts.filter((p) => p.published).length,
+      count: posts.filter((p) => p.status === "published").length,
     },
     {
       id: "drafts" as const,
       label: "Drafts",
-      count: posts.filter((p) => !p.published).length,
+      count: posts.filter((p) => p.status !== "published").length,
     },
   ];
 
@@ -218,11 +218,11 @@ export default function PostsListClient() {
                 style={{
                   height: 26,
                   fontSize: 11,
-                  background: p.published
+                  background: p.status === "published"
                     ? "color-mix(in oklab, var(--accent) 14%, transparent)"
                     : "var(--surface-2)",
-                  color: p.published ? "var(--accent)" : "var(--fg-muted)",
-                  borderColor: p.published
+                  color: p.status === "published" ? "var(--accent)" : "var(--fg-muted)",
+                  borderColor: p.status === "published"
                     ? "color-mix(in oklab, var(--accent) 30%, transparent)"
                     : "var(--line)",
                 }}
@@ -232,11 +232,11 @@ export default function PostsListClient() {
                     width: 6,
                     height: 6,
                     borderRadius: "50%",
-                    background: p.published ? "var(--accent)" : "var(--fg-dim)",
+                    background: p.status === "published" ? "var(--accent)" : "var(--fg-dim)",
                     flexShrink: 0,
                   }}
                 />
-                {p.published ? "Published" : "Draft"}
+                {p.status === "published" ? "Published" : p.status === "archived" ? "Archived" : "Draft"}
               </span>
 
               <div
@@ -250,7 +250,7 @@ export default function PostsListClient() {
                 style={{ display: "flex", gap: 6, justifyContent: "flex-end" }}
               >
                 <button
-                  onClick={() => handleToggle(p.id, p.published)}
+                  onClick={() => handleToggle(p.id, p.status === "published")}
                   style={{
                     height: 32,
                     padding: "0 12px",
@@ -262,7 +262,7 @@ export default function PostsListClient() {
                     color: "var(--fg)",
                   }}
                 >
-                  {p.published ? "Unpublish" : "Publish"}
+                  {p.status === "published" ? "Unpublish" : "Publish"}
                 </button>
                 <Link
                   href={`/admin/posts/${p.id}`}

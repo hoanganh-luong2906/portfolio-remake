@@ -36,8 +36,8 @@ export async function createPostAction(formData: FormData) {
       .filter(Boolean),
     cover: (formData.get("cover") as string) || "loom",
     body,
-    published: formData.get("published") === "on",
-  });
+    status: formData.get("published") === "on" ? "published" : "draft",
+  } as Parameters<typeof createPost>[0]);
 
   revalidatePath("/blog");
   revalidatePath("/admin/posts");
@@ -62,8 +62,8 @@ export async function updatePostAction(id: number, formData: FormData) {
       .filter(Boolean),
     cover: (formData.get("cover") as string) || "loom",
     body,
-    published: formData.get("published") === "on",
-  });
+    status: formData.get("published") === "on" ? "published" : "draft",
+  } as Parameters<typeof updatePost>[1]);
 
   revalidatePath("/blog");
   revalidatePath(`/blog/${slugify(title)}`);
@@ -78,9 +78,9 @@ export async function deletePostAction(id: number) {
   revalidatePath("/admin/posts");
 }
 
-export async function togglePublishAction(id: number, published: boolean) {
+export async function togglePublishAction(id: number, isPublished: boolean) {
   await verifySession();
-  await updatePost(id, { published });
+  await updatePost(id, { status: isPublished ? "draft" : "published" });
   revalidatePath("/blog");
   revalidatePath("/admin/posts");
 }

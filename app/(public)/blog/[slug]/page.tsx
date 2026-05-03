@@ -34,7 +34,7 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
   const { slug } = await props.params;
   const posts = await getPublishedPosts();
   const post = await getPostBySlug(slug);
-  if (!post || !post.published) notFound();
+  if (!post || post.status !== "published") notFound();
 
   const idx = posts.findIndex((p) => p.slug === slug);
   const prev = posts[idx + 1] ?? null;

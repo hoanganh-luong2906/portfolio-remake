@@ -8,6 +8,14 @@ export function getAllExperiences() {
   return getDb().select().from(experiences).orderBy(asc(experiences.sortOrder));
 }
 
+export function getPublishedExperiences() {
+  return getDb()
+    .select()
+    .from(experiences)
+    .where(eq(experiences.status, "published"))
+    .orderBy(asc(experiences.sortOrder));
+}
+
 export async function getExperienceById(id: number) {
   await verifySession();
   return getDb()

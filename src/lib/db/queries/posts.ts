@@ -13,7 +13,7 @@ export function getPublishedPosts() {
   return getDb()
     .select()
     .from(posts)
-    .where(eq(posts.published, true))
+    .where(eq(posts.status, "published"))
     .orderBy(desc(posts.createdAt));
 }
 

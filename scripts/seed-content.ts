@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
-import { getDb } from "../src/lib/db";
-import { experiences, projects } from "../src/lib/db/schema";
 import { PORTFOLIO_DATA } from "../src/lib/data";
+import { getDb } from "../src/lib/db";
+import { experiences, posts, projects } from "../src/lib/db/schema";
 
 function slugify(s: string) {
   return s
@@ -28,6 +28,7 @@ async function seed() {
     summary: p.blurb,
     metrics: [...p.metrics],
     featured: true,
+    status: "published" as const,
     sortOrder: i,
   }));
 
@@ -49,14 +50,33 @@ async function seed() {
     company: e.company,
     note: e.note,
     current: e.year.toLowerCase().includes("now"),
+    status: "published" as const,
     sortOrder: i,
   }));
 
-  await db
-    .insert(experiences)
-    .values(experienceRows)
-    .onConflictDoNothing();
+  await db.insert(experiences).values(experienceRows).onConflictDoNothing();
   console.log(`  Inserted ${experienceRows.length} experiences.`);
+
+  console.log("Seeding posts…");
+  const postRows = PORTFOLIO_DATA.blog.map((b) => ({
+    slug: b.slug,
+    title: b.title,
+    excerpt: b.excerpt,
+    category: b.category,
+    tags: [...b.tags],
+    cover: b.cover,
+    body: `# ${b.title}\n\n${b.excerpt}\n`,
+    status: "published" as const,
+  }));
+
+  await db
+    .insert(posts)
+    .values(postRows)
+    .onConflictDoUpdate({
+      target: posts.slug,
+      set: { updatedAt: sql`now()` },
+    });
+  console.log(`  Inserted ${postRows.length} posts.`);
 
   console.log("Done.");
   process.exit(0);

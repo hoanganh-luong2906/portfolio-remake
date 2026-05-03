@@ -1,4 +1,5 @@
 import Navbar from "@/app/(public)/components/Navbar";
+import Providers from "@/app/providers";
 
 export const metadata = { title: "Portfolio" };
 
@@ -8,9 +9,11 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section suppressHydrationWarning>
-      <Navbar />
-      {children}
-    </section>
+    <Providers>
+      <section suppressHydrationWarning>
+        <Navbar />
+        {children}
+      </section>
+    </Providers>
   );
 }

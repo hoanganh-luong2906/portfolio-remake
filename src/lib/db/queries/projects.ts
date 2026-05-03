@@ -1,5 +1,5 @@
 import type { NewProject } from "../schema";
-import { asc, eq } from "drizzle-orm";
+import { and, asc, eq } from "drizzle-orm";
 import { verifySession } from "../../dal";
 import { getDb } from "../index";
 import { projects } from "../schema";
@@ -8,11 +8,19 @@ export function getAllProjects() {
   return getDb().select().from(projects).orderBy(asc(projects.sortOrder));
 }
 
+export function getPublishedProjects() {
+  return getDb()
+    .select()
+    .from(projects)
+    .where(eq(projects.status, "published"))
+    .orderBy(asc(projects.sortOrder));
+}
+
 export function getFeaturedProjects() {
   return getDb()
     .select()
     .from(projects)
-    .where(eq(projects.featured, true))
+    .where(and(eq(projects.featured, true), eq(projects.status, "published")))
     .orderBy(asc(projects.sortOrder));
 }
 
